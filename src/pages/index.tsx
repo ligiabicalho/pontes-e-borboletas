@@ -1,12 +1,9 @@
-import Calculator from "@/components/Home/Hero/Calculator";
-import DefaultLayout from "@/layouts/DefaultLayout";
+import Hero from "@/components/Home/Hero/Hero";
 
 export default function Home() {
   return (
     <>
-      <DefaultLayout>
-        <Calculator />
-      </DefaultLayout>
+      <Hero />
     </>
   );
 }
