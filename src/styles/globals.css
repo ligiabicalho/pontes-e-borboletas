@@ -102,10 +102,14 @@ html {
     transform: scale3d(1.05, 1.05, 1)
   }
 
-  .how-it-works-bg-gradient {
+  .bg-gradiente-circle-purple {
+    background: radial-gradient(circle, #fff 25%, #CCE);
+  }
+
+  .bg-gradient-yellow-purple {
     background: linear-gradient(
       105deg,
-      rgba(186, 149, 34, 0.4) -3.22%,
+      rgba(255, 221, 85, 0.4) -3.22%,
       rgba(98, 25, 221, 0.4) 100.17%
     );
   }
@@ -113,7 +117,7 @@ html {
   .bg-gradient {
     background: linear-gradient(
       180deg,
-      hsla(120, 46%, 95%, 1) 17%,
+      hsla(54, 50%, 87%, 0.4) 17%,
       hsla(0, 0%, 100%, 1) 58%,
       hsla(0, 0%, 100%, 1) 66%,
       hsla(270, 55%, 96%, 1) 92%
@@ -124,7 +128,7 @@ html {
     .bg-gradient {
       background: linear-gradient(
         90deg,
-        hsla(120, 46%, 95%, 1) 20%,
+        hsla(54, 50%, 87%, 0.4) 20%,
         hsla(0, 0%, 100%, 1) 50%,
         hsla(0, 0%, 100%, 1) 50%,
         hsla(270, 55%, 96%, 1) 80%
