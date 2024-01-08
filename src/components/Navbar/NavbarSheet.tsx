@@ -8,30 +8,35 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
+import { NAV_ITEMS } from "./Navbar";
 
 type NavbarSheetProps = {
   children: JSX.Element;
 };
 
-type NavItem = {
-  title: string;
-  href: string;
-};
+// type NavItem = {
+//   title: string;
+//   href: string;
+// };
 
-const NAV_ITEMS: NavItem[] = [
-  {
-    title: "How it works",
-    href: "/how-it-works",
-  },
-  {
-    title: "About us",
-    href: "/about-us",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-  },
-];
+// const NAV_ITEMS: NavItem[] = [
+//   {
+//     title: "Home",
+//     href: "/",
+//   },
+//   {
+//     title: "How it works",
+//     href: "/how-it-works",
+//   },
+//   {
+//     title: "About us",
+//     href: "/about-us",
+//   },
+//   {
+//     title: "Contact",
+//     href: "/contact",
+//   },
+// ];
 
 export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);

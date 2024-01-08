@@ -15,7 +15,7 @@ import { NavbarSheet } from "./NavbarSheet";
 
 type NavItem = {
   title: string;
-  href?: string;
+  href: string;
   navigationMenuLinkClassName?: string;
   Icon?: LucideIcon;
   Wrapper?: React.FunctionComponent<any>;
@@ -27,10 +27,14 @@ type MobileNavItem = {
   Wrapper?: React.FunctionComponent<any>;
 };
 
-const NAV_ITEMS: NavItem[] = [
+export const NAV_ITEMS: NavItem[] = [
   {
     title: "Home",
     href: "/",
+  },
+  {
+    title: "FAQ",
+    href: "/faq",
   },
   {
     title: "How it works",
