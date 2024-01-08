@@ -8,34 +8,35 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
+import { NAV_ITEMS } from "./Navbar";
 
 type NavbarSheetProps = {
   children: JSX.Element;
 };
 
-type NavItem = {
-  title: string;
-  href: string;
-};
+// type NavItem = {
+//   title: string;
+//   href: string;
+// };
 
-const NAV_ITEMS: NavItem[] = [
-  {
-    title: "How it works",
-    href: "/how-it-works",
-  },
-  {
-    title: "About us",
-    href: "/about-us",
-  },
-  {
-    title: "Help",
-    href: "/help",
-  },
-  {
-    title: "Support",
-    href: "/support",
-  },
-];
+// const NAV_ITEMS: NavItem[] = [
+//   {
+//     title: "Home",
+//     href: "/",
+//   },
+//   {
+//     title: "How it works",
+//     href: "/how-it-works",
+//   },
+//   {
+//     title: "About us",
+//     href: "/about-us",
+//   },
+//   {
+//     title: "Contact",
+//     href: "/contact",
+//   },
+// ];
 
 export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,10 +48,10 @@ export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
         <SheetHeader>
           <Link href="/">
             <Image
-              src="/logo-alfa-v1.png"
-              width={110}
+              src="/logo-short.png"
+              width={150}
               height={30}
-              alt="NFTRentMarketplace"
+              alt="Logo IPB - Instituto Pontes e Borboletas"
               className="mx-auto"
             />
           </Link>
@@ -59,7 +60,7 @@ export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
         <div className="w-full flex flex-col space-y-2 mt-6 items-center">
           {NAV_ITEMS.map(({ title, href }) => (
             <SheetClose key={title} asChild>
-              <Link className={"font-semibold text-lg"} href={href}>
+              <Link className={"font-semibold"} href={href}>
                 {title}
               </Link>
             </SheetClose>

@@ -2,61 +2,155 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Gloria Hallelujah', cursive;
-	font-size:22px;
+	font-size: 18px;
 }
-li{
+
+li {
 	list-style:none;
 }
+
 html {
 	height: 100%;
 	background: white;
-	background: radial-gradient(circle, #fff 24%, #CCE);
+	background: radial-gradient(circle, #fff 25%, #CCE);
 	background-size: cover;
 }
 
-#container{
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .card-animation {
+    transition: transform 0.15s ease-in-out
+  }
+
+  .card-animation:hover {
+    transform: scale3d(1.05, 1.05, 1)
+  }
+
+  .bg-gradiente-circle-purple {
+    background: radial-gradient(circle, #fff 25%, #CCE);
+  }
+
+  .bg-gradient-yellow-purple {
+    background: linear-gradient(
+      105deg,
+      rgba(255, 221, 85, 0.4) -3.22%,
+      rgba(98, 25, 221, 0.4) 100.17%
+    );
+  }
+
+  .bg-gradient {
+    background: linear-gradient(
+      180deg,
+      hsla(54, 50%, 87%, 0.4) 17%,
+      hsla(0, 0%, 100%, 1) 58%,
+      hsla(0, 0%, 100%, 1) 66%,
+      hsla(270, 55%, 96%, 1) 92%
+    );
+  }
+
+  @screen lg {
+    .bg-gradient {
+      background: linear-gradient(
+        90deg,
+        hsla(54, 50%, 87%, 0.4) 20%,
+        hsla(0, 0%, 100%, 1) 50%,
+        hsla(0, 0%, 100%, 1) 50%,
+        hsla(270, 55%, 96%, 1) 80%
+      );
+    }
+  }
+}
+
+#container {
 	width: 290px;
 	text-align: center;
 	height:auto;
 	margin:4px auto;
 }
-#calculadora{
+#calculadora {
 	width: 234px;
 	height: 230px;
 	margin:0 auto;
 	padding:2px;
 	background-color: #65D277;
 }
-.input-valor{
+.input-valor {
 	margin:8px auto;
 	width:95%;
 	height:30px;
@@ -68,7 +162,7 @@ html {
 	background-color:#fff;
 	box-shadow: inset -1px -1px 4px 1px #eee;
 }
-.key li{
+.key li {
 	width:50px;
 	height:30px;
 	border-radius:3px;
@@ -81,14 +175,14 @@ html {
 	text-align: center;
 	box-shadow: 0px 3px 1px 0px #444651;
 }
-.key li:hover{
+.key li:hover {
 	background-color: #BEF9F0;
 	color: #6C73FA;
 	transition:0.2s;
 }
-.key li:active{
+.key li:active {
 	box-shadow: 0px 1px 1px 0px #444651;
 }
-.verificar{
+.verificar {
 	width: 93.4% !important;
 }

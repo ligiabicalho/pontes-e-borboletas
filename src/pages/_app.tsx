@@ -1,23 +1,24 @@
-import '@/styles/globals.css';
-import type { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Titillium_Web, Odibee_Sans } from 'next/font/google';
-import { NextPage } from 'next';
-import type { ReactElement, ReactNode } from 'react';
-import DefaultLayout from '@/layouts/DefaultLayout';
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Titillium_Web, Odibee_Sans } from "next/font/google";
+import { NextPage } from "next";
+import type { ReactElement, ReactNode } from "react";
+import DefaultLayout from "@/layouts/DefaultLayout";
+import { Toaster } from "@/components/ui/toaster";
 
 export const queryClient = new QueryClient();
 
 const titilliumWeb = Titillium_Web({
-  subsets: ['latin'],
-  variable: '--font-secondary',
-  weight: ['200', '300', '400', '600', '700', '900'],
+  subsets: ["latin"],
+  variable: "--font-secondary",
+  weight: ["200", "300", "400", "600", "700", "900"],
 });
 
 const odibeeSans = Odibee_Sans({
-  subsets: ['latin'],
-  variable: '--font-primary',
-  weight: ['400'],
+  subsets: ["latin"],
+  variable: "--font-primary",
+  weight: ["400"],
 });
 
 export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
@@ -33,15 +34,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
   return (
     <QueryClientProvider client={queryClient}>
-        {getLayout(<Component {...pageProps} />)}
+      {getLayout(<Component {...pageProps} />)}
 
+      <Toaster />
 
-        <style jsx global>{`
-          :root {
-            --font-primary: ${odibeeSans.style.fontFamily};
-            --font-secondary: ${titilliumWeb.style.fontFamily};
-          }
-        `}</style>
+      <style jsx global>{`
+        :root {
+          --font-primary: ${odibeeSans.style.fontFamily};
+          --font-secondary: ${titilliumWeb.style.fontFamily};
+        }
+      `}</style>
     </QueryClientProvider>
   );
 }

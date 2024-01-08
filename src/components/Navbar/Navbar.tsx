@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -16,7 +15,7 @@ import { NavbarSheet } from "./NavbarSheet";
 
 type NavItem = {
   title: string;
-  href?: string;
+  href: string;
   navigationMenuLinkClassName?: string;
   Icon?: LucideIcon;
   Wrapper?: React.FunctionComponent<any>;
@@ -28,10 +27,14 @@ type MobileNavItem = {
   Wrapper?: React.FunctionComponent<any>;
 };
 
-const NAV_ITEMS: NavItem[] = [
+export const NAV_ITEMS: NavItem[] = [
   {
     title: "Home",
     href: "/",
+  },
+  {
+    title: "FAQ",
+    href: "/faq",
   },
   {
     title: "How it works",
@@ -40,6 +43,10 @@ const NAV_ITEMS: NavItem[] = [
   {
     title: "About us",
     href: "/about-us",
+  },
+  {
+    title: "Contact",
+    href: "/contact",
   },
 ];
 
@@ -72,14 +79,26 @@ export function Navbar() {
   return (
     <div className={cn("w-full fixed z-navbar", bgColor)}>
       <div className="container flex items-center justify-between w-full py-4">
-        <Link href="/">
-          <Image
-            src="/logo-alfa-v1.png"
-            width={110}
-            height={30}
-            alt="NFTRentMarketplace"
-          />
-        </Link>
+        <div className="hidden lg:flex">
+          <Link href="/">
+            <Image
+              src="/logo-large.png"
+              width={300}
+              height={50}
+              alt="Logo IPB - Instituto Pontes e Borboletas"
+            />
+          </Link>
+        </div>
+        <div className="lg:hidden">
+          <Link href="/">
+            <Image
+              src="/logo-short.png"
+              width={150}
+              height={50}
+              alt="Logo IPB - Instituto Pontes e Borboletas"
+            />
+          </Link>
+        </div>
 
         <div className="space-x-4 block lg:hidden">
           {MOBILE_NAV_ITEMS.map(({ Icon, key, Wrapper }) => {

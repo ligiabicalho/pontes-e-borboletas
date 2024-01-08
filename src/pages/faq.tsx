@@ -30,17 +30,22 @@ const FAQ_ITEMS = [
   },
 ];
 
-export function FAQ() {
+export default function FAQ() {
   return (
-    <section className="lg:flex flex-col bg-background py-20 items-center justify-center">
-      <h2 className="font-primary text-4xl text-center mb-6">FAQ</h2>
+    <section className="lg:flex flex-col py-20 items-center justify-center">
+      <h2 className="font-primary text-4xl text-center">FAQ</h2>
+      <h3 className="font-primary text-xl text-left self-start pb-8 pl-20">
+        Perguntas frequentes
+      </h3>
 
       <div className="container">
         {FAQ_ITEMS.map((item) => (
           <Accordion type="single" collapsible key={item.title}>
             <AccordionItem value={item.title}>
               <AccordionTrigger>{item.title}</AccordionTrigger>
-              <AccordionContent>{item.description}</AccordionContent>
+              <AccordionContent className="text-xs lg:text-base">
+                {item.description}
+              </AccordionContent>
             </AccordionItem>
           </Accordion>
         ))}
