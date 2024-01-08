@@ -30,10 +30,13 @@ const FAQ_ITEMS = [
   },
 ];
 
-export function FAQ() {
+export default function FAQ() {
   return (
-    <section className="lg:flex flex-col py-8 items-center justify-center">
-      <h2 className="font-primary text-4xl text-center my-8 pb-8">FAQ</h2>
+    <section className="lg:flex flex-col py-20 items-center justify-center">
+      <h2 className="font-primary text-4xl text-center">FAQ</h2>
+      <h3 className="font-primary text-xl text-left self-start pb-8 pl-20">
+        Perguntas frequentes
+      </h3>
 
       <div className="container">
         {FAQ_ITEMS.map((item) => (
