@@ -1,0 +1,7 @@
+[
+  { "product": "apple", "price": 1.00, "checked": false },
+  { "product": "banana", "price": 1.50, "checked": false },
+  { "product": "carrot", "price": 2.00, "checked": false },
+  { "product": "daikon", "price": 2.50, "checked": false },
+  { "product": "eggplant", "price": 3.00, "checked": false }
+]
