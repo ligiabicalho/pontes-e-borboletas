@@ -89,7 +89,7 @@ const OTHER_INFOS: ItemCardProps[] = [
 
 export default function HowItWorks() {
   return (
-    <section className="lg:flex flex-col py-20 items-center justify-center">
+    <section className="min-h-screen flex flex-col pt-20">
       <h2 className="font-primary text-2xl lg:text-4xl text-center mb-6">
         How it works
       </h2>
