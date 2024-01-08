@@ -5,6 +5,7 @@ import { Titillium_Web, Odibee_Sans } from "next/font/google";
 import { NextPage } from "next";
 import type { ReactElement, ReactNode } from "react";
 import DefaultLayout from "@/layouts/DefaultLayout";
+import { Toaster } from "@/components/ui/toaster";
 
 export const queryClient = new QueryClient();
 
@@ -34,6 +35,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <QueryClientProvider client={queryClient}>
       {getLayout(<Component {...pageProps} />)}
+
+      <Toaster />
 
       <style jsx global>{`
         :root {
