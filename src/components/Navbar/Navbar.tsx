@@ -33,19 +33,19 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/",
   },
   {
-    title: "FAQ",
-    href: "/faq",
-  },
-  {
-    title: "How it works",
+    title: "Como funcionamos",
     href: "/how-it-works",
   },
   {
-    title: "About us",
+    title: "Perguntas frequentes",
+    href: "/faq",
+  },
+  {
+    title: "Sobre nós",
     href: "/about-us",
   },
   {
-    title: "Contact",
+    title: "Contato",
     href: "/contact",
   },
 ];
