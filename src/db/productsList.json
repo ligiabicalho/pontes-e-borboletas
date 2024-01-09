@@ -1,12 +1,14 @@
 [
-  { "product": "Apple", "price": 1.00, "checked": false },
-  { "product": "Banana", "price": 1.50, "checked": false },
-  { "product": "Carrot", "price": 2.00, "checked": false },
-  { "product": "Daikon", "price": 2.50, "checked": false },
-  { "product": "Eggplant", "price": 3.00, "checked": false },
-  { "product": "Egg", "price": 12.00, "checked": false },
-  { "product": "Onion", "price": 4.00, "checked": false },
-  { "product": "Zucchini", "price": 5.00, "checked": false },
-  { "product": "Coffee", "price": 22.00, "checked": false },
-  { "product": "Broccoli", "price": 6.00, "checked": false }
+  { "product": "Apple", "price": 1.00, "quantity": 3, "checked": false },
+  { "product": "Banana", "price": 1.50, "quantity": 3, "checked": false },
+  { "product": "Carrot", "price": 2.00, "quantity": 3, "checked": false },
+  { "product": "Daikon", "price": 2.50, "quantity": 3, "checked": false },
+  { "product": "Eggplant", "price": 3.00, "quantity": 3, "checked": false },
+  { "product": "Egg", "price": 12.00, "quantity": 3, "checked": false },
+  { "product": "Onion", "price": 4.00, "quantity": 3, "checked": false },
+  { "product": "Zucchini", "price": 5.00, "quantity": 3, "checked": false },
+  { "product": "Coffee", "price": 22.00, "quantity": 3, "checked": false },
+  { "product": "Broccoli", "price": 6.00, "quantity": 3, "checked": false },
+  { "product": "Cabbage", "price": 7.00, "quantity": 3, "checked": false },
+  { "product": "Cauliflower", "price": 8.00, "quantity": 3, "checked": false }
 ]

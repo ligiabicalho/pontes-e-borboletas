@@ -5,62 +5,68 @@ type Items = {
   product: string;
   price: number;
   checked: boolean;
+  quantity?: number;
 };
 
 const ShoppingList = () => {
-  const [items, setItems] = useState([...productList]);
-  const [totalValue, setTotalValue] = useState(0);
-  const [contributionRate, setContributionRate] = useState(0);
-  const [totalToPay, setTotalToPay] = useState(0);
-
-  const handleCheck = (index: number) => {
-    const updatedItems = [...items];
-    updatedItems[index].checked = !updatedItems[index].checked;
-
-    updatedItems.sort((a, b) => {
+  const sortProducts = (products: Items[]) => {
+    return products.sort((a, b) => {
       // Mantém os itens checados na base e organiza alfabeticamente
       if (a.checked && !b.checked) return 1;
       if (!a.checked && b.checked) return -1;
       return a.product.localeCompare(b.product);
     });
-
-    setItems(updatedItems);
-    recalculateTotal(updatedItems);
   };
 
-  const recalculateTotal = (updatedItems: Items[]) => {
+  const sortedProductsList = sortProducts(productList);
+  const [items, setItems] = useState<Items[]>([...sortedProductsList]);
+  const [totalValue, setTotalValue] = useState<number>(0);
+  const [contributionRate, setContributionRate] = useState<number>(17);
+  const [totalToPay, setTotalToPay] = useState<number>(0);
+
+  const handleCheck = (index: number) => {
+    let updatedItems = [...items];
+    updatedItems[index].checked = !updatedItems[index].checked;
+
+    updatedItems = sortProducts(updatedItems);
+
+    setItems(updatedItems);
+    calculateSubTotal(updatedItems);
+  };
+
+  const calculateSubTotal = (updatedItems: Items[]) => {
     const checkedItems = updatedItems.filter((item) => item.checked);
     const newTotalValue = checkedItems.reduce(
       (acc, item) => acc + item.price,
       0,
     );
     setTotalValue(newTotalValue);
-    recalculateContribution(newTotalValue);
+    calculateTotalToPay(newTotalValue, contributionRate);
   };
 
-  const recalculateContribution = (newTotalValue: number) => {
-    const checkedContribution = newTotalValue * (contributionRate / 100);
-    const newTotalToPay = newTotalValue + checkedContribution;
+  const calculateTotalToPay = (totalValue: number, rate: number) => {
+    const checkedContribution = totalValue * (rate / 100);
+    const newTotalToPay = totalValue + checkedContribution;
     setTotalToPay(newTotalToPay);
+    return newTotalToPay;
   };
 
   const handleContributionChange = (rate: number) => {
-    setContributionRate(rate);
-    recalculateContribution(totalValue);
+    setContributionRate(() => rate);
+    calculateTotalToPay(totalValue, rate);
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col w-[100%] gap-4 lg:flex-row lg:justify-evenly">
       <div>
         <ul className="flex flex-col gap-2 lg:gap-0">
           {items.map((item, index) => (
             <li key={index}>
               <label htmlFor={item.product} className="flex gap-1">
                 <input
-                  name={item.product}
                   id={item.product}
                   type="checkbox"
-                  checked={item.checked || false}
+                  checked={item.checked}
                   onChange={() => handleCheck(index)}
                 />
                 {item.product} - R${item.price.toFixed(2)}
@@ -69,46 +75,50 @@ const ShoppingList = () => {
           ))}
         </ul>
 
-        <p className="my-2">Sub-total: R${totalValue.toFixed(2)}</p>
+        <p className="my-2 italic">Sub-total: R${totalValue.toFixed(2)}</p>
       </div>
-      <div>
-        <fieldset className="flex flex-col gap-2 lg:gap-0">
+      <div className="flex flex-col justify-between">
+        <fieldset className="flex flex-col gap-2 lg:gap-0 lg:self-center">
           <legend className="my-2">Contribuição:</legend>
-          <label className="flex gap-1">
+          <label className="flex gap-1" htmlFor="rate-17">
             <input
               type="radio"
+              id="rate-17"
               name="contribution"
               value={17}
-              // checked={contributionRate === 17}
+              checked={contributionRate === 17}
               onChange={() => handleContributionChange(17)}
             />
             17% - R${(totalValue * 0.17).toFixed(2)}
           </label>
-          <label className="flex gap-1">
+          <label className="flex gap-1" htmlFor="rate-20">
             <input
+              id="rate-20"
               type="radio"
               name="contribution"
               value={20}
-              // checked={contributionRate === 20}
+              checked={contributionRate === 20}
               onChange={() => handleContributionChange(20)}
             />
             20% - R${(totalValue * 0.2).toFixed(2)}
           </label>
-          <label className="flex gap-1">
+          <label className="flex gap-1" htmlFor="rate-25">
             <input
+              id="rate-25"
               type="radio"
               name="contribution"
               value={25}
-              // checked={contributionRate === 25}
+              checked={contributionRate === 25}
               onChange={() => handleContributionChange(25)}
             />
             25% - R${(totalValue * 0.25).toFixed(2)}
           </label>
-          <label className="flex gap-1">
+          {/* <label className="flex gap-1">
             <input
               type="radio"
               name="contribution"
               value="other"
+              min="17"
               // checked={contributionRate > 25}
               // onChange={() => handleContributionChange(0)}
             />
@@ -120,11 +130,12 @@ const ShoppingList = () => {
                 handleContributionChange(parseFloat(e.target.value))
               }
             />
-          </label>
+          </label> */}
         </fieldset>
+        <p className="my-2 font-bold">
+          Total a pagar: R${totalToPay.toFixed(2)}
+        </p>
       </div>
-
-      <p>Total a pagar: R${totalToPay.toFixed(2)}</p>
     </div>
   );
 };
