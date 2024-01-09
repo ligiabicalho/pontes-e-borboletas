@@ -1,6 +1,12 @@
 import { useState } from "react";
 import productList from "../../../db/productsList.json";
 
+type Items = {
+  product: string;
+  price: number;
+  checked: boolean;
+};
+
 const ShoppingList = () => {
   const [items, setItems] = useState([...productList]);
   const [totalValue, setTotalValue] = useState(0);
@@ -12,7 +18,7 @@ const ShoppingList = () => {
     updatedItems[index].checked = !updatedItems[index].checked;
 
     updatedItems.sort((a, b) => {
-      // Mantém os itens checados no topo e organiza alfabeticamente
+      // Mantém os itens checados na base e organiza alfabeticamente
       if (a.checked && !b.checked) return 1;
       if (!a.checked && b.checked) return -1;
       return a.product.localeCompare(b.product);
@@ -22,7 +28,7 @@ const ShoppingList = () => {
     recalculateTotal(updatedItems);
   };
 
-  const recalculateTotal = (updatedItems) => {
+  const recalculateTotal = (updatedItems: Items[]) => {
     const checkedItems = updatedItems.filter((item) => item.checked);
     const newTotalValue = checkedItems.reduce(
       (acc, item) => acc + item.price,
@@ -38,7 +44,7 @@ const ShoppingList = () => {
     setTotalToPay(newTotalToPay);
   };
 
-  const handleContributionChange = (rate) => {
+  const handleContributionChange = (rate: number) => {
     setContributionRate(rate);
     recalculateContribution(totalValue);
   };

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
 
 const Calculator = () => {
-  const { register, handleSubmit, setValue, watch } = useForm();
+  const { register, handleSubmit, setValue, watch, getValues } = useForm();
   const [expression, setExpression] = useState<string>("");
   const inputValor = watch("input-valor", "");
 
-  const onSubmit = (data: { "input-valor": string }) => {
-    setExpression(data["input-valor"]);
+  const onSubmit = () => {
+    setExpression(getValues("input-valor"));
   };
 
   const handleButtonClick = (value: string) => {
