@@ -1,0 +1,17 @@
+[
+  { "product": "Celery", "price": 9.00, "quantity": 3, "checked": false },
+  { "product": "Corn", "price": 10.00, "quantity": 3, "checked": false },
+  { "product": "Cucumber", "price": 11.00, "quantity": 3, "checked": false },
+  { "product": "Garlic", "price": 13.00, "quantity": 3, "checked": false },
+  { "product": "Ginger", "price": 14.00, "quantity": 3, "checked": false },
+  { "product": "Lettuce", "price": 15.00, "quantity": 3, "checked": false },
+  { "product": "Mushroom", "price": 16.00, "quantity": 3, "checked": false },
+  { "product": "Pepper", "price": 17.00, "quantity": 3, "checked": false },
+  { "product": "Potato", "price": 18.00, "quantity": 3, "checked": false },
+  { "product": "Pumpkin", "price": 19.00, "quantity": 3, "checked": false },
+  { "product": "Radish", "price": 20.00, "quantity": 3, "checked": false },
+  { "product": "Spinach", "price": 21.00, "quantity": 3, "checked": false },
+  { "product": "Tomato", "price": 23.00, "quantity": 3, "checked": false },
+  { "product": "Turnip", "price": 24.00, "quantity": 3, "checked": false },
+  { "product": "Watermelon", "price": 25.00, "quantity": 3, "checked": false }
+]
