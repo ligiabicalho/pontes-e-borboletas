@@ -36,7 +36,7 @@ const CopyToClipboardButton = () => {
       data-clipboard-target="#pix-key"
       aria-label="Copy to clipboard"
       onClick={handleCopyClick}
-      className="btn flex items-center space-x-2 bg-purple-600 text-yellow-200 p-1 rounded"
+      className="btn flex items-center bg-purple-600 text-yellow-200 p-1 rounded"
     >
       <Copy size={14} />
     </button>
