@@ -9,7 +9,7 @@
   { "product": "Batata inglesa 500g", "price": 7.00, "quantity": 3, "checked": false },
   { "product": "Cebola amarela 400g", "price": 6.40, "quantity": 3, "checked": false },
   { "product": "Folha de batata doce unidade", "price": 5.00, "quantity": 3, "checked": false },
-  { "product": "Ovos dúzia", "price": 7.00, "quantity": 13.50, "checked": false },
-  { "product": "Ovos pente", "price": 8.00, "quantity": 33.75, "checked": false },
+  { "product": "Ovos dúzia", "price": 13.50, "quantity": 3, "checked": false },
+  { "product": "Ovos pente", "price": 33.75, "quantity": 3, "checked": false },
   { "product": "Tomate Italiano 400g", "price": 7.80, "quantity": 3, "checked": false }
 ]
