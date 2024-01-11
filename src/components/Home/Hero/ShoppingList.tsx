@@ -77,10 +77,10 @@ const ShoppingList = () => {
 
         <p className="my-2 italic">Sub-total: R${totalValue.toFixed(2)}</p>
       </div>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between lg:w-[40%]">
         <fieldset className="flex flex-col gap-2 lg:gap-0 lg:self-center">
           <legend className="my-2">Contribuição:</legend>
-          <label className="flex gap-1" htmlFor="rate-17">
+          {/* <label className="flex gap-1" htmlFor="rate-17">
             <input
               type="radio"
               id="rate-17"
@@ -112,26 +112,32 @@ const ShoppingList = () => {
               onChange={() => handleContributionChange(25)}
             />
             25% - R${(totalValue * 0.25).toFixed(2)}
-          </label>
-          {/* <label className="flex gap-1">
+          </label> */}
+          <label className="flex gap-1" htmlFor="rate-30">
             <input
+              id="rate-30"
               type="radio"
               name="contribution"
-              value="other"
-              min="17"
-              // checked={contributionRate > 25}
-              // onChange={() => handleContributionChange(0)}
+              value={30}
+              checked={contributionRate === 30}
+              onChange={() => handleContributionChange(30)}
             />
-            Outro:{" "}
-            <input
-              type="number"
-              className="px-2 w-16"
-              onChange={(e) =>
-                handleContributionChange(parseFloat(e.target.value))
-              }
-            />
-          </label> */}
+            30% - R${(totalValue * 0.3).toFixed(2)}
+          </label>
         </fieldset>
+        <div className="text-xs">
+          <p className="text-xs">Transparência dos nossos custos:</p>
+          <p className="text-xs">
+            luz (R$290,00), água (R$220,00), internet e telefonia (R$170,00),
+            frete (R$450,00), mídias digitais (R$340,00), equipe - 01 Armazém;
+            07 feiras por semana; 05 dias de Cozinha para população em situação
+            de rua - (R$10.320,00)
+          </p>
+          <p className="text-xs italic">
+            Escolher contribuir ou não é livre porque a sua decisão é outra
+            economia com a gente!
+          </p>
+        </div>
         <p className="my-2 font-bold">
           Total a pagar: R${totalToPay.toFixed(2)}
         </p>
