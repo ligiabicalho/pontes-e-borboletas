@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.0",
     "clipboard": "^2.0.11",
     "clsx": "^2.1.0",
+    "cors": "^2.8.5",
     "lucide-react": "^0.263.1",
     "next": "^14.0.4",
     "react": "^18.2.0",

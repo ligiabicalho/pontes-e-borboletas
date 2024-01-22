@@ -8,35 +8,26 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
-import { NAV_ITEMS } from "./Navbar";
 
 type NavbarSheetProps = {
   children: JSX.Element;
 };
 
-// type NavItem = {
-//   title: string;
-//   href: string;
-// };
+type NavItem = {
+  title: string;
+  href: string;
+};
 
-// const NAV_ITEMS: NavItem[] = [
-//   {
-//     title: "Home",
-//     href: "/",
-//   },
-//   {
-//     title: "How it works",
-//     href: "/how-it-works",
-//   },
-//   {
-//     title: "About us",
-//     href: "/about-us",
-//   },
-//   {
-//     title: "Contact",
-//     href: "/contact",
-//   },
-// ];
+const NAV_ITEMS_MOBILE: NavItem[] = [
+  {
+    title: "Home",
+    href: "/",
+  },
+  {
+    title: "Contato",
+    href: "/contact",
+  },
+];
 
 export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +49,7 @@ export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
         </SheetHeader>
 
         <div className="w-full flex flex-col space-y-2 mt-6 items-center">
-          {NAV_ITEMS.map(({ title, href }) => (
+          {NAV_ITEMS_MOBILE.map(({ title, href }) => (
             <SheetClose key={title} asChild>
               <Link className={"font-semibold"} href={href}>
                 {title}
