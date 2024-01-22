@@ -17,8 +17,6 @@ const CopyToClipboardButton = ({
     });
 
     clipboard.on("success", (e: any) => {
-      console.log("handleCopyClick event e", e);
-      console.log("Texto copiado para a área de transferência", e.text);
       toast({
         variant: "success",
         title: "Sucesso!",
