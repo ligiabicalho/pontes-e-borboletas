@@ -65,7 +65,7 @@ const ShoppingList = () => {
   return (
     <div className="flex flex-col w-[100%] gap-4 lg:flex-row lg:justify-evenly">
       <div>
-        <ul className="flex flex-col gap-2 lg:gap-0">
+        <ul className="flex flex-col gap-2 lg:gap-1">
           {items.map((item, index) => (
             <li key={index}>
               <label htmlFor={item.product} className="flex gap-1">
@@ -83,7 +83,7 @@ const ShoppingList = () => {
 
         <p className="my-2 italic">Sub-total: R${subTotalValue.toFixed(2)}</p>
       </div>
-      <div className="flex flex-col justify-between lg:w-[40%]">
+      <div className="flex flex-col justify-between lg:w-[25%]">
         <fieldset className="flex flex-col gap-2 lg:gap-0 lg:self-center">
           <legend className="my-2">Contribuição:</legend>
           <div className="px-2">
@@ -133,7 +133,7 @@ const ShoppingList = () => {
           {!!subTotalValue && `R$${totalToPay.split(".").join(",")}`}
         </p>
       </div>
-      <div>
+      <div className="lg:w-[28%]">
         <GetPixCopyAndPaste value={totalToPay} />
       </div>
     </div>
