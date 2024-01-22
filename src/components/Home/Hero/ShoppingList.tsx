@@ -21,8 +21,8 @@ const ShoppingList = () => {
 
   const sortedProductsList = sortProducts(productList);
   const [items, setItems] = useState<Items[]>([...sortedProductsList]);
-  const [totalValue, setTotalValue] = useState<number>(0);
-  const [contributionRate, setContributionRate] = useState<number>(17);
+  const [subTotalValue, setSubTotalValue] = useState<number>(0);
+  const [contributionRate, setContributionRate] = useState<number>(30);
   const [totalToPay, setTotalToPay] = useState<string>("0");
 
   const handleCheck = (index: number) => {
@@ -37,24 +37,29 @@ const ShoppingList = () => {
 
   const calculateSubTotal = (updatedItems: Items[]) => {
     const checkedItems = updatedItems.filter((item) => item.checked);
-    const newTotalValue = checkedItems.reduce(
-      (acc, item) => acc + item.price,
-      0,
-    );
-    setTotalValue(newTotalValue);
-    calculateTotalToPay(newTotalValue, contributionRate);
+    const newTotalValue = checkedItems
+      .reduce((acc, item) => acc + item.price, 0)
+      .toFixed(2);
+    const newTotalNumber = Number(newTotalValue);
+    setSubTotalValue(newTotalNumber);
+    calculateTotalToPay(newTotalNumber, contributionRate);
   };
 
-  const calculateTotalToPay = (totalValue: number, rate: number) => {
-    const checkedContribution = totalValue * (rate / 100);
-    const newTotalToPay = (totalValue + checkedContribution).toFixed(2);
+  const checkedContribution = (subTotalValue: number, rate: number) => {
+    const contribution = (subTotalValue * (rate / 100)).toFixed(2);
+    return contribution;
+  };
+
+  const calculateTotalToPay = (subTotalValue: number, rate: number) => {
+    const contribution = Number(checkedContribution(subTotalValue, rate));
+    const newTotalToPay = (subTotalValue + contribution).toFixed(2);
     setTotalToPay(newTotalToPay);
     return newTotalToPay;
   };
 
   const handleContributionChange = (rate: number) => {
-    setContributionRate(() => rate);
-    calculateTotalToPay(totalValue, rate);
+    setContributionRate(rate);
+    calculateTotalToPay(subTotalValue, rate);
   };
 
   return (
@@ -70,63 +75,51 @@ const ShoppingList = () => {
                   checked={item.checked}
                   onChange={() => handleCheck(index)}
                 />
-                {item.product} - R${item.price.toFixed(2)}
+                {item.product} - R${item.price.toFixed(2).split(".").join(",")}
               </label>
             </li>
           ))}
         </ul>
 
-        <p className="my-2 italic">Sub-total: R${totalValue.toFixed(2)}</p>
+        <p className="my-2 italic">Sub-total: R${subTotalValue.toFixed(2)}</p>
       </div>
       <div className="flex flex-col justify-between lg:w-[40%]">
         <fieldset className="flex flex-col gap-2 lg:gap-0 lg:self-center">
           <legend className="my-2">Contribuição:</legend>
-          {/* <label className="flex gap-1" htmlFor="rate-17">
-            <input
-              type="radio"
-              id="rate-17"
-              name="contribution"
-              value={17}
-              checked={contributionRate === 17}
-              onChange={() => handleContributionChange(17)}
-            />
-            17% - R${(totalValue * 0.17).toFixed(2)}
-          </label>
-          <label className="flex gap-1" htmlFor="rate-20">
-            <input
-              id="rate-20"
-              type="radio"
-              name="contribution"
-              value={20}
-              checked={contributionRate === 20}
-              onChange={() => handleContributionChange(20)}
-            />
-            20% - R${(totalValue * 0.2).toFixed(2)}
-          </label>
-          <label className="flex gap-1" htmlFor="rate-25">
-            <input
-              id="rate-25"
-              type="radio"
-              name="contribution"
-              value={25}
-              checked={contributionRate === 25}
-              onChange={() => handleContributionChange(25)}
-            />
-            25% - R${(totalValue * 0.25).toFixed(2)}
-          </label> */}
-          <label className="flex gap-1" htmlFor="rate-30">
-            <input
-              id="rate-30"
-              type="radio"
-              name="contribution"
-              value={30}
-              checked={contributionRate === 30}
-              onChange={() => handleContributionChange(30)}
-            />
-            30% - R${(totalValue * 0.3).toFixed(2)}
-          </label>
+          <div className="px-2">
+            <label className="flex gap-1" htmlFor="rate-30">
+              <input
+                id="rate-30"
+                type="radio"
+                name="contribution"
+                value={30}
+                checked={contributionRate === 30}
+                onChange={() => handleContributionChange(30)}
+              />
+              30%{" "}
+              {!!subTotalValue &&
+                `- R$${checkedContribution(subTotalValue, 30)
+                  .split(".")
+                  .join(",")}`}
+            </label>
+            <label className="flex gap-1" htmlFor="rate-0">
+              <input
+                id="rate-0"
+                type="radio"
+                name="contribution"
+                value={0}
+                checked={contributionRate === 0}
+                onChange={() => handleContributionChange(0)}
+              />
+              Não desejo contribuir.
+            </label>
+          </div>
         </fieldset>
-        <div>
+        <div className="p-2">
+          <p className="text-xs italic pb-2">
+            Escolher contribuir ou não é livre porque a sua decisão é outra
+            economia com a gente!
+          </p>
           <p className="text-xs">Transparência dos nossos custos:</p>
           <p className="text-xs">
             luz (R$290,00), água (R$220,00), internet e telefonia (R$170,00),
@@ -134,12 +127,11 @@ const ShoppingList = () => {
             07 feiras por semana; 05 dias de Cozinha para população em situação
             de rua - (R$10.320,00)
           </p>
-          <p className="text-xs italic">
-            Escolher contribuir ou não é livre porque a sua decisão é outra
-            economia com a gente!
-          </p>
         </div>
-        <p className="my-2 font-bold">Total a pagar: R${totalToPay}</p>
+        <p className="my-2 font-bold">
+          Total a pagar:{" "}
+          {!!subTotalValue && `R$${totalToPay.split(".").join(",")}`}
+        </p>
       </div>
       <div>
         <GetPixCopyAndPaste value={totalToPay} />
