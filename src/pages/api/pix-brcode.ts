@@ -19,7 +19,7 @@ export default async function handler(
   const { name, city, output, pixKey, txid, mcc }: PixQrCodeQueries = {
     name: "Lina Raquel de Oliveira Marinho",
     city: "Belo Horizonte",
-    output: "br",
+    output: "br", // gera br code
     pixKey: "21997555322",
     txid: "Feira Outra",
     mcc: "5811", // DISTRIBUIÇÃO E PRODUÇÃO DE ALIMENTOS

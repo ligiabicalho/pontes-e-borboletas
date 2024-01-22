@@ -1,19 +1,20 @@
 import CopyToClipboardButton from "./CopyToClipboardButton";
-import { getPixQrCode } from "../../../http/pix-qrcode";
+import { getPixBrCode } from "../../../http/pix-brcode";
 import { Button } from "../../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 
 const GetPixCopyAndPaste = ({ value }: { value: string }) => {
   const { toast } = useToast();
+  const targetId = "pix-brcode-copy-and-paste";
 
   const {
-    data: pixQrCode,
+    data: pixBrCode,
     isLoading,
     isSuccess,
-    mutate: getPixQrCodeMutate,
+    mutate: getPixBrCodeMutate,
   } = useMutation({
-    mutationFn: getPixQrCode,
+    mutationFn: getPixBrCode,
     onSuccess: (data) => {
       console.log("code", data);
     },
@@ -36,7 +37,7 @@ const GetPixCopyAndPaste = ({ value }: { value: string }) => {
           "Não é possível gerar Pix QRCode sem valor: selecione seus produtos e a contribuição desejada.",
       });
     } else {
-      getPixQrCodeMutate(value);
+      getPixBrCodeMutate(value);
     }
   };
 
@@ -54,24 +55,21 @@ const GetPixCopyAndPaste = ({ value }: { value: string }) => {
       >
         Gerar QrCode copia e cola
       </Button>
-      {isSuccess && pixQrCode && (
+      {isSuccess && pixBrCode && (
         <div className="flex flex-row items-center gap-2">
           <div className="flex flex-row bg-background p-2 rounded-md text-xs">
             <p className="flex overflow-hidden">
               <span
-                id="pix-qrcode-copy-and-paste"
+                id={targetId}
                 aria-label="Pix QrCode copia e cola"
                 className="w-[260px] lg:w-[360px] max-h-[18px]"
               >
-                {pixQrCode}
+                {pixBrCode}
               </span>
             </p>
             <p>...</p>
           </div>
-          <CopyToClipboardButton
-            text={pixQrCode}
-            targetId="#pix-qrcode-copy-and-paste"
-          />
+          <CopyToClipboardButton text={pixBrCode} targetId={`#${targetId}`} />
         </div>
       )}
     </div>
