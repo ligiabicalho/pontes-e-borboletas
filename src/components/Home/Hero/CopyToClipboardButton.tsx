@@ -12,16 +12,16 @@ const CopyToClipboardButton = ({
   const { toast } = useToast();
 
   const handleCopyClick = () => {
-    const clipboard = new ClipboardJS(".btn", {
+    const clipboard = new ClipboardJS(".btn-copy", {
       text: (trigger) => trigger.getAttribute("data-clipboard-text") as string,
     });
 
     clipboard.on("success", (e: any) => {
       toast({
         variant: "success",
-        title: "Sucesso!",
+        title: "QrCode copiado para a área de transferência.",
         description:
-          "QrCode copiado para a área de transferência. Cole o código no app do seu banco para efetuar o pagamento via PIX.",
+          "Cole o código no app do seu banco para efetuar o pagamento via PIX.",
       });
       e.clearSelection();
       clipboard.destroy();
@@ -45,9 +45,9 @@ const CopyToClipboardButton = ({
       data-clipboard-text={text}
       aria-label="Copy to clipboard"
       onClick={handleCopyClick}
-      className="btn flex items-center bg-purple-600 text-yellow-200 p-1 rounded shadow hover:bg-purple-700 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
+      className="btn-copy flex items-center bg-purple-600 text-yellow-200 p-1 rounded shadow hover:bg-purple-700 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
     >
-      <Copy size={14} />
+      <Copy size={16} />
     </button>
   );
 };
