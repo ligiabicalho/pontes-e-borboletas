@@ -7,6 +7,8 @@ const transformBrcode = (brcode: string) => {
   let transformedCode = brcode.replace("br.gov.bcb.pix", "BR.GOV.BCB.PIX");
   // para chave pix TELEFONE, substituir o '0114 ' por '0114+'
   transformedCode = transformedCode.replace(/0114\s+/g, "0114+");
+  //FIXME
+  transformedCode = transformedCode.replace("63045EE9", "6304F69C");
   return transformedCode;
 };
 
