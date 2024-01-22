@@ -1,5 +1,5 @@
-import CopyToClipboardButton from "@/components/Home/Hero/CopyToClipboardButton";
 import ShoppingList from "./ShoppingList";
+
 export default function Hero() {
   return (
     <section className="flex flex-col bg-gradient p-8 pt-20 min-h-screen lg:px-0">
@@ -15,15 +15,6 @@ export default function Hero() {
           final. Ao pesar seus itens aprenda esta OUTRA ECONOMIA!
         </p>
         <ShoppingList />
-        <div className="lg:flex flex flex-col justify-center items-center">
-          <p className="flex lg:mr-2">Chave PIX - Celular</p>
-          <div className="flex items-center">
-            <span id="pix-key" aria-label="Chave pix" className="pr-2">
-              21997555322
-            </span>
-            <CopyToClipboardButton />
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import productList from "../../../db/productsList.json";
+import GetPixCopyAndPaste from "./GetPixCopyAndPaste";
 
 type Items = {
   product: string;
@@ -22,7 +23,7 @@ const ShoppingList = () => {
   const [items, setItems] = useState<Items[]>([...sortedProductsList]);
   const [totalValue, setTotalValue] = useState<number>(0);
   const [contributionRate, setContributionRate] = useState<number>(17);
-  const [totalToPay, setTotalToPay] = useState<number>(0);
+  const [totalToPay, setTotalToPay] = useState<string>("0");
 
   const handleCheck = (index: number) => {
     let updatedItems = [...items];
@@ -46,7 +47,7 @@ const ShoppingList = () => {
 
   const calculateTotalToPay = (totalValue: number, rate: number) => {
     const checkedContribution = totalValue * (rate / 100);
-    const newTotalToPay = totalValue + checkedContribution;
+    const newTotalToPay = (totalValue + checkedContribution).toFixed(2);
     setTotalToPay(newTotalToPay);
     return newTotalToPay;
   };
@@ -125,7 +126,7 @@ const ShoppingList = () => {
             30% - R${(totalValue * 0.3).toFixed(2)}
           </label>
         </fieldset>
-        <div className="text-xs">
+        <div>
           <p className="text-xs">Transparência dos nossos custos:</p>
           <p className="text-xs">
             luz (R$290,00), água (R$220,00), internet e telefonia (R$170,00),
@@ -138,9 +139,10 @@ const ShoppingList = () => {
             economia com a gente!
           </p>
         </div>
-        <p className="my-2 font-bold">
-          Total a pagar: R${totalToPay.toFixed(2)}
-        </p>
+        <p className="my-2 font-bold">Total a pagar: R${totalToPay}</p>
+      </div>
+      <div>
+        <GetPixCopyAndPaste value={totalToPay} />
       </div>
     </div>
   );
