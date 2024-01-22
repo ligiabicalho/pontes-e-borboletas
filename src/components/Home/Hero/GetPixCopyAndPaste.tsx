@@ -49,7 +49,7 @@ const GetPixCopyAndPaste = ({ value }: { value: string }) => {
       </p>
       <Button
         aria-label="Gerar QrCode copia e cola"
-        className="m-2"
+        className="bg-purple-700 text-yellow-300 p-4 rounded-sm shadow-md shadow-purple-400 hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 m-4"
         onClick={handleClickGetPixQrCode}
         disabled={isLoading}
       >
@@ -58,11 +58,11 @@ const GetPixCopyAndPaste = ({ value }: { value: string }) => {
       {isSuccess && pixBrCode && (
         <div className="flex flex-row items-center gap-2">
           <div className="flex flex-row bg-background p-2 rounded-md text-xs">
-            <p className="flex overflow-hidden">
+            <p className="flex overflow-x-scroll lg:overflow-hidden">
               <span
                 id={targetId}
                 aria-label="Pix QrCode copia e cola"
-                className="w-[260px] lg:w-[360px] max-h-[18px]"
+                className="w-[260px] lg:w-[300px] max-h-[18px]"
               >
                 {pixBrCode}
               </span>

@@ -18,8 +18,8 @@ const CopyToClipboardButton = ({
 
     clipboard.on("success", (e: any) => {
       toast({
-        variant: "success",
-        title: "QrCode copiado para a área de transferência.",
+        variant: "alert",
+        title: "Código QrCode copiado.",
         description:
           "Cole o código no app do seu banco para efetuar o pagamento via PIX.",
       });
@@ -45,7 +45,7 @@ const CopyToClipboardButton = ({
       data-clipboard-text={text}
       aria-label="Copy to clipboard"
       onClick={handleCopyClick}
-      className="btn-copy flex items-center bg-purple-600 text-yellow-200 p-1 rounded shadow hover:bg-purple-700 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
+      className="btn-copy flex items-center bg-purple-700 text-yellow-200 p-2 rounded-sm shadow-md hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
     >
       <Copy size={16} />
     </button>
