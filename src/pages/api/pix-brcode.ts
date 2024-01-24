@@ -16,12 +16,12 @@ export default async function handler(
 ) {
   const { value } = req.body;
 
-  const bodyParams = {
+  const bodyParams: IPixQrCodeParams = {
     name: "Lina R. Oliveira Marinho",
     city: "Belo Horizonte",
     key: "+5521997555322",
     value,
-    transactionId: getFormattedDate(), 
+    transactionId: getFormattedDate(),
     message: "Via App Feira Outra",
   };
 
@@ -31,15 +31,16 @@ export default async function handler(
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(bodyParams)
+      body: JSON.stringify(bodyParams),
     });
-    if (response.statusText !== ("OK")) {
-      return res.status(500).json({ error: `Erro ao gerar Pix BrCode, server error` });
+    if (response.statusText !== "OK") {
+      return res
+        .status(500)
+        .json({ error: `Erro ao gerar Pix BrCode, server error` });
     }
     const data = await response.json();
-    console.log('response',data)
     return res.status(200).json({ data });
   } catch (error: any) {
     console.error("Erro ao gerar Pix QrCode:", error);

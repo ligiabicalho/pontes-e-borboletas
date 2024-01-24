@@ -10,7 +10,7 @@ export const getPixBrCode = async (value: string) => {
 
     const { data, error }: PixBrCodeResponse = await response.json();
     if (error) throw new Error(error);
-    
+
     return data.brCode;
   } catch (error: any) {
     console.error("Erro ao gerar Pix BrCode.", error);
