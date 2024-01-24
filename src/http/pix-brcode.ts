@@ -1,15 +1,6 @@
 type PixBrCodeResponse = {
-  data: { brcode: string };
+  data: { brCode: string };
   error: string;
-};
-
-const transformBrcode = (brcode: string) => {
-  let transformedCode = brcode.replace("br.gov.bcb.pix", "BR.GOV.BCB.PIX");
-  // para chave pix TELEFONE, substituir o '0114 ' por '0114+'
-  transformedCode = transformedCode.replace(/0114\s+/g, "0114+");
-  //FIXME
-  transformedCode = transformedCode.replace("63045EE9", "6304F69C");
-  return transformedCode;
 };
 
 export const getPixBrCode = async (value: string) => {
@@ -18,12 +9,11 @@ export const getPixBrCode = async (value: string) => {
     const response = await fetch(apiUrl);
 
     const { data, error }: PixBrCodeResponse = await response.json();
-
     if (error) throw new Error(error);
-    const brcode = transformBrcode(data?.brcode);
-    return brcode;
+    
+    return data.brCode;
   } catch (error: any) {
-    console.error("Erro ao gerar Pix BrCode.", error.message);
+    console.error("Erro ao gerar Pix BrCode.", error);
     throw new Error("Erro ao gerar Pix BrCode.", error.message);
   }
 };

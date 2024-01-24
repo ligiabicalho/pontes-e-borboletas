@@ -16,7 +16,7 @@ const GetPixCopyAndPaste = ({ value }: { value: string }) => {
   } = useMutation({
     mutationFn: getPixBrCode,
     onSuccess: (data) => {
-      console.log("code", data);
+      console.log("brCode Generated!", data);
     },
     onError: (error) => {
       toast({
