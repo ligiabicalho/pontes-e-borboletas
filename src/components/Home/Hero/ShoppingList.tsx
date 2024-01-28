@@ -1,26 +1,30 @@
 import { useState } from "react";
-import productList from "../../../db/productsList.json";
+import productsList from "../../../db/productsList.json";
 import GetPixCopyAndPaste from "./GetPixCopyAndPaste";
 
 type Items = {
-  product: string;
+  id: number;
+  name: string;
+  unit: string;
   price: number;
   checked: boolean;
+  active: boolean;
   quantity?: number;
 };
 
 const ShoppingList = () => {
   const sortProducts = (products: Items[]) => {
     return products.sort((a, b) => {
-      // Mantém os itens checados na base e organiza alfabeticamente
-      if (a.checked && !b.checked) return 1;
-      if (!a.checked && b.checked) return -1;
-      return a.product.localeCompare(b.product);
+      // // Mantém os itens checados na base e organiza alfabeticamente
+      // if (a.checked && !b.checked) return 1;
+      // if (!a.checked && b.checked) return -1;
+      return a.name.localeCompare(b.name);
     });
   };
 
-  const sortedProductsList = sortProducts(productList);
+  const sortedProductsList = sortProducts(productsList);
   const [items, setItems] = useState<Items[]>([...sortedProductsList]);
+  console.log('itens', items);
   const [subTotalValue, setSubTotalValue] = useState<number>(0);
   const [contributionRate, setContributionRate] = useState<number>(30);
   const [totalToPay, setTotalToPay] = useState<string>("0");
@@ -63,26 +67,44 @@ const ShoppingList = () => {
   };
 
   return (
-    <div className="flex flex-col w-[100%] gap-4 lg:flex-row lg:justify-evenly">
-      <div>
-        <ul className="flex flex-col gap-2 lg:gap-1">
-          {items.map((item, index) => (
-            <li key={index}>
-              <label htmlFor={item.product} className="flex gap-1">
-                <input
-                  id={item.product}
-                  type="checkbox"
-                  checked={item.checked}
-                  onChange={() => handleCheck(index)}
-                />
-                {item.product} - R${item.price.toFixed(2).split(".").join(",")}
-              </label>
-            </li>
-          ))}
-        </ul>
+    <div className="flex flex-col gap-4 lg:flex-row lg:justify-evenly">
 
-        <p className="my-2 italic">Sub-total: R${subTotalValue.toFixed(2)}</p>
+      <div className="flex flex-col items-center w-full">
+        <div className="overflow-x-auto w-full">
+          <table className="w-full">
+            <tbody className="divide-y divide-gray-200">
+              {items
+                .filter(item => item.active)
+                .map((item, index) => (
+                  <tr key={item.id}>
+                    <td className={`flex items-center px-4 py-2 whitespace-nowrap ${item.checked && 'bg-gray-100'}`}>
+                        <input
+                          id={item.name}
+                          type="checkbox"
+                          checked={item.checked}
+                          onChange={() => handleCheck(index)}
+                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                        />
+                        <label htmlFor={item.name} className="w-full">
+                          <p className="ml-2 block text-sm font-medium text-gray-900">{item.name}</p>
+                          <p className="flex px-2 justify-between">
+                            <span className="whitespace-nowrap text-sm text-gray-500">
+                              {item.unit}
+                            </span>
+                            <span className="whitespace-nowrap text-sm text-gray-500">
+                              R${item.price.toFixed(2).split(".").join(",")}
+                            </span>
+                          </p>
+                        </label>
+                    </td>
+                  </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="my-2 italic self-start">Sub-total: R${subTotalValue.toFixed(2)}</p>
       </div>
+
       <div className="flex flex-col justify-between lg:w-[25%]">
         <fieldset className="flex flex-col gap-2 lg:gap-0 lg:self-center">
           <legend className="my-2">Contribuição:</legend>
