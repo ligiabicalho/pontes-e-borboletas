@@ -24,7 +24,6 @@ const ShoppingList = () => {
 
   const sortedProductsList = sortProducts(productsList);
   const [items, setItems] = useState<Items[]>([...sortedProductsList]);
-  console.log('itens', items);
   const [subTotalValue, setSubTotalValue] = useState<number>(0);
   const [contributionRate, setContributionRate] = useState<number>(30);
   const [totalToPay, setTotalToPay] = useState<string>("0");
@@ -68,41 +67,48 @@ const ShoppingList = () => {
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:justify-evenly">
-
       <div className="flex flex-col items-center w-full">
         <div className="overflow-x-auto w-full">
           <table className="w-full">
             <tbody className="divide-y divide-gray-200">
               {items
-                .filter(item => item.active)
+                .filter((item) => item.active)
                 .map((item, index) => (
                   <tr key={item.id}>
-                    <td className={`flex items-center px-4 py-2 whitespace-nowrap ${item.checked && 'bg-gray-100'}`}>
-                        <input
-                          id={item.name}
-                          type="checkbox"
-                          checked={item.checked}
-                          onChange={() => handleCheck(index)}
-                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                        />
-                        <label htmlFor={item.name} className="w-full">
-                          <p className="ml-2 block text-sm font-medium text-gray-900">{item.name}</p>
-                          <p className="flex px-2 justify-between">
-                            <span className="whitespace-nowrap text-sm text-gray-500">
-                              {item.unit}
-                            </span>
-                            <span className="whitespace-nowrap text-sm text-gray-500">
-                              R${item.price.toFixed(2).split(".").join(",")}
-                            </span>
-                          </p>
-                        </label>
+                    <td
+                      className={`flex items-center px-4 py-2 whitespace-nowrap ${
+                        item.checked && "bg-gray-100"
+                      }`}
+                    >
+                      <input
+                        id={item.name}
+                        type="checkbox"
+                        checked={item.checked}
+                        onChange={() => handleCheck(index)}
+                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                      />
+                      <label htmlFor={item.name} className="w-full">
+                        <p className="ml-2 block text-sm font-medium text-gray-900">
+                          {item.name}
+                        </p>
+                        <p className="flex px-2 justify-between">
+                          <span className="whitespace-nowrap text-sm text-gray-500">
+                            {item.unit}
+                          </span>
+                          <span className="whitespace-nowrap text-sm text-gray-500">
+                            R${item.price.toFixed(2).split(".").join(",")}
+                          </span>
+                        </p>
+                      </label>
                     </td>
                   </tr>
-              ))}
+                ))}
             </tbody>
           </table>
         </div>
-        <p className="my-2 italic self-start">Sub-total: R${subTotalValue.toFixed(2)}</p>
+        <p className="my-2 italic self-start">
+          Sub-total: R${subTotalValue.toFixed(2)}
+        </p>
       </div>
 
       <div className="flex flex-col justify-between lg:w-[25%]">
