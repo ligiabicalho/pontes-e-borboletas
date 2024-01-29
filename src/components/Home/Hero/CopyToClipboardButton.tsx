@@ -1,6 +1,7 @@
 import ClipboardJS from "clipboard";
-import { Copy } from "lucide-react";
+import { Copy, CopyCheck } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 
 const CopyToClipboardButton = ({
   text,
@@ -9,6 +10,7 @@ const CopyToClipboardButton = ({
   text: string;
   targetId: string;
 }) => {
+  const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
   const handleCopyClick = () => {
@@ -17,12 +19,16 @@ const CopyToClipboardButton = ({
     });
 
     clipboard.on("success", (e: any) => {
+      setCopied(true);
       toast({
-        variant: "alert",
+        variant: "warning",
         title: "Código QrCode copiado.",
         description:
           "Cole o código no app do seu banco para efetuar o pagamento via PIX.",
       });
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
       e.clearSelection();
       clipboard.destroy();
     });
@@ -45,9 +51,10 @@ const CopyToClipboardButton = ({
       data-clipboard-text={text}
       aria-label="Copy to clipboard"
       onClick={handleCopyClick}
-      className="btn-copy flex items-center bg-purple-700 text-yellow-200 p-2 rounded-sm shadow-md hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
+      className={`btn-copy flex items-center bg-purple-700 text-yellow-200 p-2 rounded-sm shadow-md hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2
+        ${copied ? "bg-yellow-400 hover:bg-yellow-500 text-purple-800" : ""}`}
     >
-      <Copy size={16} />
+      {copied ? <CopyCheck size={16} /> : <Copy size={16} />}
     </button>
   );
 };
