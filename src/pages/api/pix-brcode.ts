@@ -10,6 +10,7 @@ type PixQrCodeQueries = {
   mcc?: string;
 };
 
+//FIXME: Refatorar para usar o serviço QRCodePixGeneratorService
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
