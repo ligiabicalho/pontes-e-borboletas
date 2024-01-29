@@ -2,7 +2,7 @@ import { useState } from "react";
 import productsList from "../../../db/productsList.json";
 import GetPixCopyAndPaste from "./GetPixCopyAndPaste";
 
-type Items = {
+type Product = {
   id: number;
   name: string;
   unit: string;
@@ -13,24 +13,33 @@ type Items = {
 };
 
 const ShoppingList = () => {
-  const sortProducts = (products: Items[]) => {
+  // Seleciona só os items ativos
+  const activeItems = productsList.filter((item) => item.active);
+  console.log("activeItems", activeItems);
+
+
+  const sortProducts = (products: Product[]) => {
     return products.sort((a, b) => {
-      // // Mantém os itens checados na base e organiza alfabeticamente
+
+      //Mantém os itens checados na base da lista
       // if (a.checked && !b.checked) return 1;
       // if (!a.checked && b.checked) return -1;
+
+      // organiza alfabeticamente
       return a.name.localeCompare(b.name);
     });
   };
+  const sortedProductsList = sortProducts(activeItems);
 
-  const sortedProductsList = sortProducts(productsList);
-  const [items, setItems] = useState<Items[]>([...sortedProductsList]);
+  const [items, setItems] = useState<Product[]>([...sortedProductsList]);
   const [subTotalValue, setSubTotalValue] = useState<number>(0);
   const [contributionRate, setContributionRate] = useState<number>(30);
   const [totalToPay, setTotalToPay] = useState<string>("0");
 
-  const handleCheck = (index: number) => {
+  const handleCheck = (id: number) => {
     let updatedItems = [...items];
-    updatedItems[index].checked = !updatedItems[index].checked;
+    const [ itemChecked ] = updatedItems.filter((item) => item.id === id);
+    itemChecked.checked = !itemChecked.checked;
 
     updatedItems = sortProducts(updatedItems);
 
@@ -38,7 +47,7 @@ const ShoppingList = () => {
     calculateSubTotal(updatedItems);
   };
 
-  const calculateSubTotal = (updatedItems: Items[]) => {
+  const calculateSubTotal = (updatedItems: Product[]) => {
     const checkedItems = updatedItems.filter((item) => item.checked);
     const newTotalValue = checkedItems
       .reduce((acc, item) => acc + item.price, 0)
@@ -67,31 +76,33 @@ const ShoppingList = () => {
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:justify-evenly">
-      <div className="flex flex-col items-center w-full">
+      <div className="flex flex-col items-center w-full lg:w-[40%]">
         <div className="overflow-x-auto w-full">
           <table className="w-full">
             <tbody className="divide-y divide-gray-200">
               {items
                 .filter((item) => item.active)
-                .map((item, index) => (
+                .map((item) => (
                   <tr key={item.id}>
                     <td
                       className={`flex items-center px-4 py-2 whitespace-nowrap ${
                         item.checked && "bg-gray-100"
                       }`}
                     >
-                      <input
-                        id={item.name}
-                        type="checkbox"
-                        checked={item.checked}
-                        onChange={() => handleCheck(index)}
-                        className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                      />
-                      <label htmlFor={item.name} className="w-full">
-                        <p className="ml-2 block text-sm font-medium text-gray-900">
-                          {item.name}
-                        </p>
-                        <p className="flex px-2 justify-between">
+                      <label htmlFor={`${item.id}`} className="flex flex-col w-full">
+                        <div className="flex">
+                          <input
+                            id={`${item.id}`}
+                            type="checkbox"
+                            checked={item.checked}
+                            onChange={() => handleCheck(item.id)}
+                            className="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                            />
+                          <span className="ml-2 block text-sm font-medium text-gray-900">
+                            {item.name}
+                          </span>
+                        </div>
+                        <p className="flex px-2 ml-5 justify-between">
                           <span className="whitespace-nowrap text-sm text-gray-500">
                             {item.unit}
                           </span>
@@ -101,6 +112,7 @@ const ShoppingList = () => {
                         </p>
                       </label>
                     </td>
+                        
                   </tr>
                 ))}
             </tbody>
@@ -109,10 +121,18 @@ const ShoppingList = () => {
         <p className="my-2 italic self-start">
           Sub-total: R${subTotalValue.toFixed(2)}
         </p>
+        <ul className="flex flex-col pl-2 self-start">
+          {items.map((item) => (
+            item.checked && 
+            <li key={item.id} className="text-xs">
+              {`${item.name} ${item.unit} R$${item.price.toFixed(2).split(".").join(",")}`}
+            </li>
+        ))}
+        </ul>
       </div>
 
-      <div className="flex flex-col justify-between lg:w-[25%]">
-        <fieldset className="flex flex-col gap-2 lg:gap-0 lg:self-center">
+      <div className="flex flex-col gap-4 lg:w-[25%]">
+        <fieldset className="flex flex-col gap-2 lg:gap-0">
           <legend className="my-2">Contribuição:</legend>
           <div className="px-2">
             <label className="flex gap-1" htmlFor="rate-30">
@@ -143,7 +163,7 @@ const ShoppingList = () => {
             </label>
           </div>
         </fieldset>
-        <div className="p-2">
+        <div className="py-2">
           <p className="text-xs italic pb-2">
             Escolher contribuir ou não é livre porque a sua decisão é outra
             economia com a gente!
@@ -162,7 +182,7 @@ const ShoppingList = () => {
         </p>
       </div>
       <div className="lg:w-[28%]">
-        <GetPixCopyAndPaste value={totalToPay} />
+        <GetPixCopyAndPaste value={Number(totalToPay)} />
       </div>
     </div>
   );
