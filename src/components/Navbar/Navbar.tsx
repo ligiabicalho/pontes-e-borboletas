@@ -107,7 +107,7 @@ export function Navbar() {
                 key={key}
                 variant={"outline"}
                 size={"icon"}
-                className="bg-transparent"
+                className="bg-transparent border-gray-600 rounded-3xl shadow-md"
               >
                 <Icon size={18} />
               </Button>
