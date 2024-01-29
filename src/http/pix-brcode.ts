@@ -7,17 +7,19 @@ type PixBrCodeResponse = {
 
 export const getPixBrCode = async (value: number) => {
   try {
-    const qRCodePixGenerator = new QRCodePixGeneratorService('01');
+    const qRCodePixGenerator = new QRCodePixGeneratorService("01");
     const payload = {
       name: "Lina Raquel de Oliveira",
       key: "+5521997555322",
       city: "Belo Horizonte",
       // transactionId?: string;
       message: "Pagamento Feira Outra via App Pontes e Borboletas",
-    }
-    const { data, error } = await qRCodePixGenerator.generate({ ...payload, value})
+    };
+    const { data, error } = await qRCodePixGenerator.generate({
+      ...payload,
+      value,
+    });
     if (error) throw new Error(error.message);
-    console.log("data", data);
     return data;
   } catch (error: any) {
     console.error("Erro ao gerar Pix QrCode.", error.message);
