@@ -6,7 +6,6 @@ import { useMutation } from "@tanstack/react-query";
 import { Copy } from "lucide-react";
 
 const GetPixCopyAndPaste = ({ value }: { value: number }) => {
-  console.log("value", value);
   const { toast } = useToast();
   const targetId = "pix-brcode-copy-and-paste";
 
@@ -46,10 +45,13 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
   return (
     <div className="lg:flex flex flex-col justify-center items-center">
       <p className="lg:mr-2">
-        Pague sua compra via <span className="font-bold">Pix Copia e Cola</span>: gere o código, em seguida o copie <span><Copy size={14} className="inline mx-1"/></span> e cole no
-        app do seu banco. 
+        Pague sua compra via <span className="font-bold">Pix Copia e Cola</span>
+        : gere o código, em seguida o copie
+        <span>
+          <Copy size={14} className="inline mx-1" />
+        </span>
+        e cole no app do seu banco.
       </p>
-        
       <Button
         aria-label="Gerar QrCode copia e cola"
         className="bg-purple-700 text-yellow-300 p-4 rounded-sm shadow-md shadow-purple-400 hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 m-4"
@@ -65,7 +67,7 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
               <span
                 id={targetId}
                 aria-label="Pix QrCode copia e cola"
-                className="w-[220px] lg:w-[300px] max-h-[18px]"
+                className="w-[220px] lg:w-[300px] max-h-[18px] select-all touch-pan-x"
               >
                 {data.brCode}
               </span>
