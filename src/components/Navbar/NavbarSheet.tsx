@@ -27,6 +27,10 @@ const NAV_ITEMS_MOBILE: NavItem[] = [
     title: "Contato",
     href: "/contact",
   },
+  {
+    title: "Feiras",
+    href: "/fairs",
+  },
 ];
 
 export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {

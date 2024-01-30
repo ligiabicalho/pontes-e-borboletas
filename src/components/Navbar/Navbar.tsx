@@ -48,9 +48,13 @@ export const NAV_ITEMS: NavItem[] = [
     title: "Contato",
     href: "/contact",
   },
+  {
+    title: "Feiras",
+    href: "/fairs",
+  },
 ];
 
-const MOBILE_NAV_ITEMS: MobileNavItem[] = [
+const MOBILE_NAV_BAR: MobileNavItem[] = [
   {
     key: "menu",
     Icon: MenuIcon,
@@ -101,7 +105,7 @@ export function Navbar() {
         </div>
 
         <div className="space-x-4 block lg:hidden">
-          {MOBILE_NAV_ITEMS.map(({ Icon, key, Wrapper }) => {
+          {MOBILE_NAV_BAR.map(({ Icon, key, Wrapper }) => {
             const Component = (
               <Button
                 key={key}
