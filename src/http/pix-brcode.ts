@@ -1,10 +1,5 @@
 import QRCodePixGeneratorService from "@/service/qRCodePixGenerator";
 
-type PixBrCodeResponse = {
-  data: { brcode: string };
-  error: string;
-};
-
 export const getPixBrCode = async (value: number) => {
   try {
     const qRCodePixGenerator = new QRCodePixGeneratorService("01");
