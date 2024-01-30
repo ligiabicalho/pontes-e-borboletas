@@ -6,7 +6,6 @@
 		"address": "R. Ceará, 1942 - Savassi, BH/MG",
 		"frequency": "Quintas e sábados",
 		"openingHours": "9h às 15h",
-		"date": "",
 		"active": false
 	},
 	{
@@ -16,7 +15,6 @@
 		"address": "",
 		"frequency": "",
 		"openingHours": "",
-		"date": "",
 		"active": false
 	},
 	{
@@ -26,7 +24,14 @@
 		"address": "",
 		"frequency": "",
 		"openingHours": "",
-		"date": "",
+		"active": false
+	},
+	{	"id": 4,
+		"name": "",
+		"location": "",
+		"address": "",
+		"frequency": "",
+		"openingHours": "",
 		"active": false
 	}
 ]

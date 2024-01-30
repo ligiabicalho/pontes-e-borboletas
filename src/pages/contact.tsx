@@ -11,25 +11,29 @@ import {
 } from "../db/contacts.json";
 import Link from "next/link";
 import {
+  CalendarClock,
+  CalendarDays,
+  CircleDollarSign,
+  Info,
   Instagram,
+  LucideIcon,
   Mail,
+  MapPin,
   MessageCircle,
   MousePointerClick,
   Phone,
+  Store,
 } from "lucide-react";
 
 export default function Contact() {
-  interface Storage {
-    name: string;
-    address: string;
-    frequency: string;
-    openingHours: string;
-    obs: string;
-    [key: string]: string; // This is the index signature
-  }
-
-  const storageFair: Storage = { ...storage };
-
+  const icons: LucideIcon[] = [
+    Store,
+    MapPin,
+    CalendarDays,
+    CalendarClock,
+    Info,
+  ];
+  let Icon: LucideIcon;
   return (
     <section className="h-fit flex flex-col pt-20 px-6">
       <h2 className="font-primary text-2xl lg:text-4xl text-center mb-6">
@@ -59,7 +63,7 @@ export default function Contact() {
         </Link>
         <Link href={linktree} target="_blank" rel="noopener noreferrer">
           <MousePointerClick className="inline mx-1" />
-          <span className="underline">Linktree: links úteis</span>
+          <span className="underline">Linktree: links importantes</span>
         </Link>
         <Link
           href={`mailto:${email.address}`}
@@ -71,30 +75,38 @@ export default function Contact() {
             {email.address.substring(0, email.address.indexOf("@"))}
           </span>
         </Link>
+        {pix.display && (
+          <p>
+            <CircleDollarSign className="inline mx-1" /> Chave pix:{" "}
+            <span className="select-all">{pix.key}</span>
+          </p>
+        )}
       </div>
       <div className="flex flex-col mb-4 ">
-        {Object.keys(storageFair).map((key) => (
-          <p
-            key={key}
-            className={`${key === "name" && "font-bold"} ${
-              key === "obs" && "text-xs"
-            } select-all`}
-          >
-            {storageFair[key]}
-          </p>
-        ))}
+        {storage.map(
+          ({ type, data }, index) => (
+            (Icon = icons[index]),
+            (
+              <div
+                key={type}
+                className={`flex space-y-2 items-center gap-y-4  ${
+                  type !== "name" && "pl-4"
+                }`}
+              >
+                <Icon className="inline mx-1" />
+                <span
+                  className={`${type === "name" && "font-bold"} ${
+                    type === "obs" && "text-xs"
+                  }
+                  select-all`}
+                >
+                  {data}
+                </span>
+              </div>
+            )
+          ),
+        )}
       </div>
-      <p>
-        Chave pix: <span className="select-all">{pix.key}</span>
-      </p>
     </section>
   );
 }
-//<AtSign />
-//
-//
-//<MapPin />
-//<Store />
-//<CalendarDays /> <CalendarClock />
-//<Clock />
-//<Phone />
