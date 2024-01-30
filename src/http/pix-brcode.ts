@@ -1,14 +1,15 @@
 import QRCodePixGeneratorService from "@/service/qRCodePixGenerator";
+import { creator, pix } from "../db/contacts.json";
 
 export const getPixBrCode = async (value: number) => {
   try {
     const qRCodePixGenerator = new QRCodePixGeneratorService("01");
     const payload = {
-      name: "Lina Raquel de Oliveira",
-      key: "+5521997555322",
-      city: "Belo Horizonte",
+      name: creator,
+      key: pix.key,
+      city: pix.city,
+      message: pix.message,
       // transactionId?: string;
-      message: "Pagamento Feira Outra via App Pontes e Borboletas",
     };
     const { data, error } = await qRCodePixGenerator.generate({
       ...payload,
