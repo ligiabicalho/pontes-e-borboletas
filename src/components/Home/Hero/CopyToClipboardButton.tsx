@@ -51,10 +51,14 @@ const CopyToClipboardButton = ({
       data-clipboard-text={text}
       aria-label="Copy to clipboard"
       onClick={handleCopyClick}
-      className={`btn-copy flex items-center bg-purple-700 text-yellow-200 p-2 rounded-sm shadow-md hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2
-        ${copied ? "bg-yellow-400 hover:bg-yellow-500 text-purple-800" : ""}`}
+      className={`btn-copy flex items-center p-2 rounded-sm shadow-md focus:ring-2 focus:ring-offset-2
+        ${
+          copied
+            ? "text-purple-600 focus:ring-purple-600 bg-yellow-400 hover:bg-yellow-500"
+            : "text-yellow-300 focus:ring-yellow-400 bg-purple-700 hover:bg-purple-600"
+        }`}
     >
-      {copied ? <CopyCheck size={16} /> : <Copy size={16} />}
+      {copied ? <CopyCheck size={18} /> : <Copy size={18} />}
     </button>
   );
 };

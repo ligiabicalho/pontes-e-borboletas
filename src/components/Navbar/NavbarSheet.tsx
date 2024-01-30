@@ -24,6 +24,10 @@ const NAV_ITEMS_MOBILE: NavItem[] = [
     href: "/",
   },
   {
+    title: "Feiras",
+    href: "/fairs",
+  },
+  {
     title: "Contato",
     href: "/contact",
   },

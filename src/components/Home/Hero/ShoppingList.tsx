@@ -1,5 +1,7 @@
 import { useState } from "react";
 import productsList from "../../../db/productsList.json";
+import costTransparency from "../../../db/costTransparency.json";
+import contributionOptions from "../../../db/contributionOptions.json";
 import GetPixCopyAndPaste from "./GetPixCopyAndPaste";
 import {
   Accordion,
@@ -36,8 +38,13 @@ const ShoppingList = () => {
 
   const [items, setItems] = useState<Product[]>([...sortedProductsList]);
   const [subTotalValue, setSubTotalValue] = useState<number>(0);
-  const [contributionRate, setContributionRate] = useState<number>(30);
   const [totalToPay, setTotalToPay] = useState<string>("0");
+
+  const contributionDefault = contributionOptions.find(
+    (option) => option.default,
+  )?.rate as number;
+  const [contributionRate, setContributionRate] =
+    useState<number>(contributionDefault);
 
   const handleCheck = (id: number) => {
     let updatedItems = [...items];
@@ -141,58 +148,60 @@ const ShoppingList = () => {
           )}
         </ul>
         <fieldset>
-          <legend className="my-2">Contribuição:</legend>
+          <legend className="my-2">{contributionOptions[0].title}</legend>
           <div className="px-2">
-            <label className="flex gap-1" htmlFor="rate-30">
-              <input
-                id="rate-30"
-                type="radio"
-                name="contribution"
-                value={30}
-                checked={contributionRate === 30}
-                onChange={() => handleContributionChange(30)}
-              />
-              30%{" "}
-              {!!subTotalValue &&
-                `- R$${checkedContribution(subTotalValue, 30)
-                  .split(".")
-                  .join(",")}`}
-            </label>
-            <label className="flex gap-1" htmlFor="rate-0">
-              <input
-                id="rate-0"
-                type="radio"
-                name="contribution"
-                value={0}
-                checked={contributionRate === 0}
-                onChange={() => handleContributionChange(0)}
-              />
-              Não desejo contribuir.
-            </label>
+            <div>
+              {contributionOptions.map(
+                (option) =>
+                  option.id && (
+                    <label
+                      className="flex gap-1"
+                      htmlFor={`rate-${option.rate}`}
+                      key={option.rate}
+                    >
+                      <input
+                        id={`rate-${option.rate}`}
+                        type="radio"
+                        name="contribution"
+                        value={option.rate}
+                        checked={contributionRate === option.rate}
+                        onChange={() => handleContributionChange(option.rate)}
+                      />
+                      {option.label}{" "}
+                      {!!option.rate &&
+                        !!subTotalValue &&
+                        `- R$${checkedContribution(subTotalValue, option.rate)
+                          .split(".")
+                          .join(",")}`}
+                    </label>
+                  ),
+              )}
+            </div>
           </div>
         </fieldset>
         <div className="py-2">
           <p className="italic text-[16px] pb-2">
-            Escolher contribuir ou não é livre porque a sua decisão é outra
-            economia com a gente!
+            {contributionOptions[0].description}
           </p>
 
-          <Accordion type="single" collapsible>
+          <Accordion type="single" collapsible className="shadow rounded-md">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-xs">
-                Transparência dos nossos custos:
+                {costTransparency[0].title}
               </AccordionTrigger>
               <AccordionContent>
+                <p className="text-xs italic pb-2">
+                  {costTransparency[0].description}
+                </p>
                 <ul>
-                  <li className="text-xs">luz (R$290,00)</li>
-                  <li className="text-xs">água (R$220,00)</li>
-                  <li className="text-xs">internet e telefonia (R$170,00)</li>
-                  <li className="text-xs">frete (R$450,00)</li>
-                  <li className="text-xs">mídias digitais (R$340,00)</li>
-                  <li className="text-xs">
-                    equipe: 01 Armazém, 07 feiras por semana, 05 dias de Cozinha
-                    para população em situação de rua - (R$10.320,00)
-                  </li>
+                  {costTransparency.map(
+                    (item) =>
+                      item.id && (
+                        <li key={item.id} className="text-xs">
+                          {`${item.expense} (${item.cost})`}
+                        </li>
+                      ),
+                  )}
                 </ul>
               </AccordionContent>
             </AccordionItem>

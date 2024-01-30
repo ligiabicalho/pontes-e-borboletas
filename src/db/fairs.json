@@ -1,0 +1,32 @@
+[
+	{
+		"id": 1,
+		"name": "Feira Outra encontra Crocco Veg",
+		"location": "Restaurante Crocco Veg",
+		"address": "R. Ceará, 1942 - Savassi, BH/MG",
+		"frequency": "Quintas e sábados",
+		"openingHours": "9h às 15h",
+		"date": "",
+		"active": false
+	},
+	{
+		"id": 2,
+		"name": "",
+		"location": "",
+		"address": "",
+		"frequency": "",
+		"openingHours": "",
+		"date": "",
+		"active": false
+	},
+	{
+		"id": 3,
+		"name": "",
+		"location": "",
+		"address": "",
+		"frequency": "",
+		"openingHours": "",
+		"date": "",
+		"active": false
+	}
+]
