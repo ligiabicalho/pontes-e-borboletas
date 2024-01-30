@@ -13,7 +13,10 @@ export default function Hero() {
   return (
     <section className="flex flex-col bg-gradient p-8 pt-20 min-h-screen lg:px-0">
       <div className="lg:container flex flex-col justify-around gap-y-3">
-        <h1 className="font-bold text-xl self-center">{heroTexts.title}</h1>
+        <div className="flex flex-col items-center pb-4">
+          <h1 className="font-bold text-xl">{heroTexts.title}</h1>
+          <p className="text-sm italic text-center">{heroTexts.description}</p>
+        </div>
 
         {activeFair && (
           <div>

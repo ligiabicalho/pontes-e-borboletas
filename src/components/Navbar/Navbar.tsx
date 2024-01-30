@@ -45,12 +45,12 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/about-us",
   },
   {
-    title: "Contato",
-    href: "/contact",
-  },
-  {
     title: "Feiras",
     href: "/fairs",
+  },
+  {
+    title: "Contato",
+    href: "/contact",
   },
 ];
 
