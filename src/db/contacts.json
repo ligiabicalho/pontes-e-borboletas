@@ -1,0 +1,22 @@
+{
+    "creator": "Lina Raquel Marinho",
+    "instagram": {
+        "url": "https://instagram.com/",
+        "endpoint": "ponteseborboletas"
+    },
+    "linktree": "https://linktr.ee/ponteseborboletas",
+    "phone": {
+        "url": "https://api.whatsapp.com/send?phone=5521997555322",
+        "number": "21 9 9755-5322"
+    },
+    "e-mail": "institutoponteseborboletas@gmail.com",
+    "address": "Av. Afonso Pena, 3667b, Serra, BH/MG",
+    "frequency": "Segunda a sábado",
+    "openingHours": "",
+    "pix": {
+        "key": "+5521997555322",
+        "type": "phone",
+        "city": "Belo Horizonte",
+        "message": "Pagamento Feira Outra via App Pontes e Borboletas"
+    }
+}
