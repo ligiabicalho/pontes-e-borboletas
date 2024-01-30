@@ -6,24 +6,40 @@
 	},
 	"linktree": "https://linktr.ee/ponteseborboletas",
 	"whatsapp": {
-		"number": "21 9 9755-5322",
+		"number": "21 99755-5322",
 		"url": "https://api.whatsapp.com/send?phone=5521997555322"
 	},
-	"phone": "31 9 90645322",
+	"phone": "31 99064-5322",
 	"email": {
 		"address": "institutoponteseborboletas@gmail.com"
 	},
-	"storage": {
-		"name": "Armazém IPB da Feira Outra",
-		"address": "Av. Afonso Pena, 3667, Serra, BH/MG",
-		"frequency": "Terça-feira aos sábados",
-		"openingHours": "8h às 19h",
-		"obs": "reinauguração maio de 2024"
-	},
+	"storage": [
+		{ 
+			"type": "name",
+			"data": "Armazém IPB da Feira Outra"
+		},
+		{ 
+			"type": "address",
+			"data": "Av. Afonso Pena, 3667, Serra, BH/MG"
+		},
+		{ 
+			"type": "frequency",
+			"data": "Terça-feira aos sábados"
+		},
+		{ 
+			"type": "openingHours",
+			"data": "8h às 19h"
+		},
+		{ 
+			"type": "obs",
+			"data": "reinauguração maio de 2024"
+		}
+	],
 	"pix": {
-		"key": "21997555322",
+		"display": true,
+		"key": "+5521997555322",
 		"type": "phone",
 		"city": "Belo Horizonte",
-		"message": "Pagamento Feira Outra via App Pontes e Borboletas"
+		"message": "Pg. Feira Outra via App Pontes e Borboletas"
 	}
 }
