@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 todo.md 
+sandbox 
 
 # dependencies
 /node_modules
