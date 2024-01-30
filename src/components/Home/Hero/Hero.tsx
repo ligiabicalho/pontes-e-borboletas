@@ -1,19 +1,41 @@
 import ShoppingList from "./ShoppingList";
+import heroTexts from "../../../db/heroTexts.json";
+import fairs from "../../../db/fairs.json";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function Hero() {
+  const activeFair = fairs.find((fair) => fair.active);
   return (
     <section className="flex flex-col bg-gradient p-8 pt-20 min-h-screen lg:px-0">
-      <div className="lg:container flex flex-col items-center justify-around gap-y-4">
-        <h2 className="font-bold text-xl">Feira Outra IPB</h2>
-        {/* <div className="self-start">
-          <p>Local: CroccoVeg </p>
-          <p>Dia: 11/01/2024</p>
-        </div> */}
-        <p className="text-xs lg:w-[80%]">
-          Os pesos dos vegetais e frutas podem terminar variando entre uns 350 e
-          410 gramas. Aceitamos esta margem de variação praticando o mesmo valor
-          final. Ao pesar seus itens aprenda esta OUTRA ECONOMIA!
-        </p>
+      <div className="lg:container flex flex-col justify-around gap-y-3">
+        <h1 className="font-bold text-xl self-center">{heroTexts.title}</h1>
+
+        {activeFair && (
+          <div>
+            <p className="text-[16px]">Local: {activeFair.location} </p>
+            <p className="text-[16px]">
+              {activeFair.frequency} de {activeFair.openingHours}
+            </p>
+          </div>
+        )}
+
+        {heroTexts.weights.title && (
+          <Accordion type="single" collapsible className="shadow rounded-md">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="text-xs p-2 px-1">
+                {heroTexts.weights.title}
+              </AccordionTrigger>
+              <AccordionContent>
+                <p className="text-xs">{heroTexts.weights.description}</p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
         <ShoppingList />
       </div>
     </section>
