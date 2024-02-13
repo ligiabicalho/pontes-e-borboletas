@@ -2,19 +2,19 @@
 	{
 		"id": 1,
 		"name": "Feira Outra encontra Crocco Veg",
-		"location": "Restaurante Crocco Veg",
-		"address": "R. Ceará, 1942 - Savassi, BH/MG",
+		"location": "Crocco Veg Restaurante",
+		"address": "R. Ceará, 1942, Savassi, BH/MG",
 		"frequency": "Quintas e sábados",
 		"openingHours": "9h às 15h",
 		"active": false
 	},
 	{
 		"id": 2,
-		"name": "",
-		"location": "",
-		"address": "",
-		"frequency": "",
-		"openingHours": "",
+		"name": "Feira Outra encontra Viveg",
+		"location": "Viveg Queijaria",
+		"address": "Rua Alves Pinto, 99, Grajaú, BH/MG",
+		"frequency": "Sextas-feira",
+		"openingHours": "9h às 17h",
 		"active": false
 	},
 	{
