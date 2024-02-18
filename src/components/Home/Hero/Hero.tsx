@@ -1,4 +1,4 @@
-import ShoppingList from "./ShoppingList";
+import ShoppingList from "../ShoppingList/ShoppingList";
 import heroTexts from "../../../db/heroTexts.json";
 import fairs from "../../../db/fairs.json";
 import {

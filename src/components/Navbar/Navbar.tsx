@@ -34,7 +34,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     title: "Como funcionamos",
-    href: "/how-it-works",
+    href: "/como-funcionamos",
   },
   {
     title: "Perguntas frequentes",
@@ -42,15 +42,19 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     title: "Sobre nós",
-    href: "/about-us",
+    href: "/sobre-nos",
   },
   {
     title: "Feiras",
-    href: "/fairs",
+    href: "/feiras",
   },
   {
     title: "Contato",
-    href: "/contact",
+    href: "/contato",
+  },
+  {
+    title: "Suporte",
+    href: "/suporte",
   },
 ];
 
