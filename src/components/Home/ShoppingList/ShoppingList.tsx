@@ -102,19 +102,19 @@ const ShoppingList = () => {
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:justify-evenly">
-      <div className="flex flex-col lg:w-[40%]">
+      <div className="flex flex-col items-center lg:w-[30%]">
         <div className="overflow-x-auto">
-          <table className="w-fit">
+          <table>
             <tbody className="divide-y divide-gray-200">
               {itemsList.map((item) => (
                 <tr key={item.id}>
                   <td
                     className={`flex flex-col py-2 whitespace-nowrap ${
                       !!item.quantity && "bg-gray-100"
-                    }  w-full`}
+                    }`}
                   >
                     <div className="flex justify-between">
-                      <span className="ml-2 block text-sm font-medium text-gray-900">
+                      <span className="ml-2 text-sm font-medium text-gray-900">
                         {item.name}
                       </span>
                       <QuantityControlButtons
@@ -139,7 +139,7 @@ const ShoppingList = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 lg:w-[25%]">
+      <div className="flex flex-col gap-3 lg:w-[30%]">
         <div>
           <p className="italic self-start">
             Sub-total: R${subTotalValue.toFixed(2).split(".").join(",")}
@@ -220,11 +220,11 @@ const ShoppingList = () => {
             </AccordionItem>
           </Accordion>
         </div>
+      </div>
+      <div className="lg:w-[30%]">
         <p className="my-2 font-bold">
           Total a pagar: R$ {totalToPay.toFixed(2).split(".").join(",")}
         </p>
-      </div>
-      <div className="lg:w-[28%]">
         <GetPixCopyAndPaste value={Number(totalToPay)} />
       </div>
     </div>
