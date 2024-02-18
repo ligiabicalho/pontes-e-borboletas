@@ -25,11 +25,15 @@ const NAV_ITEMS_MOBILE: NavItem[] = [
   },
   {
     title: "Feiras",
-    href: "/fairs",
+    href: "/feiras",
   },
   {
     title: "Contato",
-    href: "/contact",
+    href: "/contato",
+  },
+  {
+    title: "Suporte",
+    href: "/suporte",
   },
 ];
 
