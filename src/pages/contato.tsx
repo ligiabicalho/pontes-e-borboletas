@@ -35,77 +35,83 @@ export default function Contact() {
   ];
   let Icon: LucideIcon;
   return (
-    <section className="h-fit flex flex-col pt-20 px-6">
+    <section className="min-h-[100%] flex flex-col pt-20 px-6">
       <h2 className="font-primary text-2xl lg:text-4xl text-center mb-6">
-        Fale conosco!
+        Entre em contato com a gente!
       </h2>
-      <h3 className="font-primary mb-4">{creator}</h3>
-      <div className="flex flex-col gap-3 mb-4">
-        <Link
-          href={`${whatsapp.url}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <MessageCircle className="inline mx-1" />
-          <span className="underline">{whatsapp.number}</span>
-        </Link>
-        <div>
-          <Phone className="inline mx-1" />
-          <span className="select-all">{phone}</span>
+      <div className="flex flex-col lg:flex-row items-center justify-evenly">
+        <div id="contatos" className="flex flex-col gap-3 mb-4">
+          <div>
+            <h3 className="font-primary">Instituto Pontes e Borboletas</h3>
+            <h4 className="font-primary">{creator}</h4>
+          </div>
+          <Link
+            href={`${whatsapp.url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <MessageCircle className="inline mx-1" />
+            <span className="underline">{whatsapp.number}</span>
+          </Link>
+          <div>
+            <Phone className="inline mx-1" />
+            <span className="select-all">{phone}</span>
+          </div>
+          <Link
+            href={`${instagram.url}${instagram.user}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Instagram className="inline mx-1" />
+            <span className="underline">{instagram.user}</span>
+          </Link>
+          <Link href={linktree} target="_blank" rel="noopener noreferrer">
+            <MousePointerClick className="inline mx-1" />
+            <span className="underline">Linktree: links importantes</span>
+          </Link>
+          <Link
+            href={`mailto:${email.address}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Mail className="inline mx-1" />
+            <span className="underline" aria-label={email.address}>
+              {email.address.substring(0, email.address.indexOf("@"))}
+            </span>
+          </Link>
+          {pix.display && (
+            <p>
+              <CircleDollarSign className="inline mx-1" /> Chave pix:{" "}
+              <span className="select-all">{pix.key}</span>
+            </p>
+          )}
         </div>
-        <Link
-          href={`${instagram.url}${instagram.user}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Instagram className="inline mx-1" />
-          <span className="underline">{instagram.user}</span>
-        </Link>
-        <Link href={linktree} target="_blank" rel="noopener noreferrer">
-          <MousePointerClick className="inline mx-1" />
-          <span className="underline">Linktree: links importantes</span>
-        </Link>
-        <Link
-          href={`mailto:${email.address}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Mail className="inline mx-1" />
-          <span className="underline" aria-label={email.address}>
-            {email.address.substring(0, email.address.indexOf("@"))}
-          </span>
-        </Link>
-        {pix.display && (
-          <p>
-            <CircleDollarSign className="inline mx-1" /> Chave pix:{" "}
-            <span className="select-all">{pix.key}</span>
-          </p>
-        )}
-      </div>
-      <div className="flex flex-col mb-4 ">
-        {storage.map(
-          ({ type, data }, index) => (
-            (Icon = icons[index]),
-            (
-              <div
-                key={type}
-                className={`flex space-y-2 items-center gap-y-4  ${
-                  type !== "name" && "pl-4"
-                }`}
-              >
-                <Icon className="inline mx-1" />
-                <span
-                  className={`${type === "name" && "font-bold"} ${
-                    type === "obs" && "text-xs"
-                  }
-                  select-all`}
+
+        <div id="armazem" className="flex flex-col mb-4">
+          {storage.map(
+            ({ type, data }, index) => (
+              (Icon = icons[index]),
+              (
+                <div
+                  key={type}
+                  className={`flex space-y-2 items-center gap-y-4  ${
+                    type !== "name" && "pl-4"
+                  }`}
                 >
-                  {data}
-                </span>
-              </div>
-            )
-          ),
-        )}
+                  <Icon className="inline mx-1" />
+                  <span
+                    className={`${type === "name" && "font-bold"} ${
+                      type === "obs" && "text-xs"
+                    }
+                  select-all`}
+                  >
+                    {data}
+                  </span>
+                </div>
+              )
+            ),
+          )}
+        </div>
       </div>
     </section>
   );
