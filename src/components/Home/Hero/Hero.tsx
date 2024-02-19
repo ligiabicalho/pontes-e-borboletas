@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section className="flex flex-col bg-gradient p-8 pt-20 min-h-screen lg:px-0">
       <div className="lg:container flex flex-col justify-around gap-y-3">
-        <div className="flex flex-col items-center pb-4">
+        <div className="flex flex-col items-center pb-2">
           <h1 className="font-bold text-xl">{heroTexts.title}</h1>
           <p className="text-sm italic text-center">{heroTexts.description}</p>
         </div>
@@ -26,15 +26,33 @@ export default function Hero() {
             </p>
           </div>
         )}
-
-        {heroTexts.weights.title && (
+        {heroTexts.howItWorks.title && (
           <Accordion type="single" collapsible className="shadow rounded-md">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-xs p-2 px-1">
-                {heroTexts.weights.title}
+                {heroTexts.howItWorks.title}
               </AccordionTrigger>
               <AccordionContent>
-                <p className="text-xs">{heroTexts.weights.description}</p>
+                <p className="text-xs text-justify pb-2">
+                  {heroTexts.howItWorks.description}
+                </p>
+                <p className="text-xs">{heroTexts.howItWorks.step1}</p>
+                <p className="text-xs">{heroTexts.howItWorks.step2}</p>
+                <p className="text-xs ml-2">{heroTexts.howItWorks.step2_1}</p>
+                <p className="text-xs ml-2">{heroTexts.howItWorks.step2_2}</p>
+                <p className="text-xs">{heroTexts.howItWorks.step3}</p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
+        {heroTexts.weighing.title && (
+          <Accordion type="single" collapsible className="shadow rounded-md">
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="text-xs p-2 px-1">
+                {heroTexts.weighing.title}
+              </AccordionTrigger>
+              <AccordionContent>
+                <p className="text-xs">{heroTexts.weighing.description}</p>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
