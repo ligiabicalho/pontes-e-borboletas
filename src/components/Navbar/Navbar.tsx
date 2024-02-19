@@ -29,7 +29,7 @@ type MobileNavItem = {
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    title: "Home",
+    title: "Produtos",
     href: "/",
   },
   {
@@ -71,7 +71,7 @@ export function Navbar() {
 
   const changeBGColor = () => {
     if (window.scrollY > 0) {
-      setBGColor("bg-background shadow-sm");
+      setBGColor("bg-background");
     } else {
       setBGColor("bg-transparent");
     }
@@ -86,7 +86,7 @@ export function Navbar() {
 
   return (
     <div className={cn("w-full fixed z-navbar", bgColor)}>
-      <div className="container flex items-center justify-between w-full py-4">
+      <div className="container flex items-center justify-between py-3">
         <div className="hidden lg:flex">
           <Link href="/">
             <Image
@@ -115,7 +115,7 @@ export function Navbar() {
                 key={key}
                 variant={"outline"}
                 size={"icon"}
-                className="bg-transparent border-gray-600 rounded-3xl shadow-md"
+                className="bg-transparent border-gray-500 rounded-3xl shadow-md"
               >
                 <Icon size={18} />
               </Button>

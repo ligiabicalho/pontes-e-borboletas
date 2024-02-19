@@ -20,7 +20,7 @@ type NavItem = {
 
 const NAV_ITEMS_MOBILE: NavItem[] = [
   {
-    title: "Home",
+    title: "Produtos",
     href: "/",
   },
   {
@@ -43,7 +43,7 @@ export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent side="top">
+      <SheetContent side="top" className="flex flex-col items-center">
         <SheetHeader>
           <Link href="/">
             <Image
@@ -55,8 +55,8 @@ export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
             />
           </Link>
         </SheetHeader>
-
-        <div className="w-full flex flex-col space-y-2 mt-6 items-center">
+        {/* grid grid-cols-2 */}
+        <div className="w-[70%] flex flex-col space-y-2 mt-4 pb-4 place-items-center border-b-2">
           {NAV_ITEMS_MOBILE.map(({ title, href }) => (
             <SheetClose key={title} asChild>
               <Link className={"font-semibold"} href={href}>
@@ -65,6 +65,32 @@ export const NavbarSheet: React.FC<NavbarSheetProps> = ({ children }) => {
             </SheetClose>
           ))}
         </div>
+        <SheetClose asChild>
+          <div className="flex py-1 gap-6 justify-center">
+            <Link
+              href="https://instagram.com/ponteseborboletas"
+              target="_blank"
+            >
+              <Image
+                src="/instagram_black_logo_icon.svg"
+                width={30}
+                height={30}
+                alt="Logo IPB - Instituto Pontes e Borboletas"
+              />
+            </Link>
+            <Link
+              href="https://api.whatsapp.com/send?phone=5521997555322"
+              target="_blank"
+            >
+              <Image
+                src="/whatsapp_black_logo_icon.svg"
+                width={30}
+                height={30}
+                alt="Logo IPB - Instituto Pontes e Borboletas"
+              />
+            </Link>
+          </div>
+        </SheetClose>
       </SheetContent>
     </Sheet>
   );
