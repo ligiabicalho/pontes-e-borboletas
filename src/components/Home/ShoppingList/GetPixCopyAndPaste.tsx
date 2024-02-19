@@ -34,8 +34,7 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
       toast({
         variant: "destructive",
         title: "Nenhum produto selecionado.",
-        description:
-          "Não é possível gerar Pix QRCode sem valor: selecione seus produtos e a contribuição desejada.",
+        description: "Não é possível gerar o código Pix sem valor",
       });
     } else {
       getPixBrCodeMutate(value);
@@ -44,19 +43,11 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
 
   return (
     <div className="lg:flex flex flex-col justify-center items-center">
-      <p className="lg:mr-2">
-        Pague sua compra via <span className="font-bold">Pix Copia e Cola</span>
-        : gere o código, em seguida o copie
-        <span>
-          <Copy size={14} className="inline mx-1" />
-        </span>
-        e cole no app do seu banco.
-      </p>
       <Button
         aria-label="Gerar QrCode copia e cola"
         className="bg-purple-700 text-yellow-300 p-4 rounded-sm shadow-md shadow-purple-400 hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 m-4"
         onClick={handleClickGetPixQrCode}
-        disabled={isLoading}
+        disabled={isLoading || !value}
       >
         Gerar QrCode copia e cola
       </Button>
@@ -77,6 +68,19 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
           <CopyToClipboardButton text={data.brCode} targetId={`#${targetId}`} />
         </div>
       )}
+      <p className="lg:mr-2 text-sm text-justify">
+        Pague sua compra via{" "}
+        <span className="text-sm font-semibold">Pix Copia e Cola</span>: gere o
+        código, o copie
+        <span>
+          <Copy size={14} className="inline mx-1" />
+        </span>
+        e cole no app do seu banco.
+      </p>
+      <p className="text-sm italic text-justify">
+        Não é necessário nos enviar comprovante. Construímos com as bases da
+        confiança mútua!
+      </p>
     </div>
   );
 };
