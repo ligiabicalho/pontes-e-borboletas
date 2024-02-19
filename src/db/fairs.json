@@ -13,17 +13,17 @@
 		"name": "Feira Outra encontra Viveg",
 		"location": "Viveg Queijaria",
 		"address": "Rua Alves Pinto, 99, Grajaú, BH/MG",
-		"frequency": "Sextas-feira",
+		"frequency": "Sextas-feiras",
 		"openingHours": "9h às 17h",
 		"active": false
 	},
 	{
 		"id": 3,
-		"name": "",
-		"location": "",
-		"address": "",
-		"frequency": "",
-		"openingHours": "",
+		"name": "Feira Outra encontra Sagarana",
+		"location": "Sagarana Empório",
+		"address": "Rua da Bahia, 1886, Lourdes, BH/MG",
+		"frequency": "Terças-feiras",
+		"openingHours": "10hs às 17hs",
 		"active": false
 	},
 	{	"id": 4,
