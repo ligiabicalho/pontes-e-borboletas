@@ -16,7 +16,7 @@ const QuantityControlButtons = ({
   decrementQuantity,
 }: QuantityControlButtonsProps) => {
   return (
-    <div className="flex">
+    <div className="flex gap-2">
       {quantity > 0 ? (
         <MinusCircle
           className="mx-1 text-purple-700"
@@ -25,7 +25,7 @@ const QuantityControlButtons = ({
       ) : (
         <MinusCircle className="mx-1 text-gray-300" />
       )}
-      <span className="mx-1">{quantity}</span>
+      <span className="px-1">{quantity}</span>
       {quantity < availableQuantity ? (
         <PlusCircle
           className="mx-1 text-purple-700"
