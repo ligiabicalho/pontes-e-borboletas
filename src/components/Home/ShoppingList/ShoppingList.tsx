@@ -182,6 +182,7 @@ const ShoppingList = () => {
                       checked={contributionRate === option.rate}
                       onChange={() => handleContributionChange(option.rate)}
                     />
+                    {!!option.rate && "Contribuição: "}
                     {option.label}{" "}
                     {!!option.rate &&
                       !!subTotalValue &&
@@ -222,7 +223,7 @@ const ShoppingList = () => {
         </div>
       </div>
       <div className="lg:w-[30%]">
-        <p className="my-2 font-bold">
+        <p className="py-2 font-bold text-center bg-white border-2 rounded-sm">
           Total a pagar: R$ {totalToPay.toFixed(2).split(".").join(",")}
         </p>
         <GetPixCopyAndPaste value={Number(totalToPay)} />
