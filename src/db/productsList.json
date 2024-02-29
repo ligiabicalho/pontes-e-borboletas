@@ -342,8 +342,8 @@
   {
     "id": 1063,
     "name": "Abacate Manteiga ",
-    "unit": "unidade",
-    "price": 6.67,
+    "unit": "100g",
+    "price": 0.667,
     "category": "fruta",
     "active": true,
     "availableQuantity": 9,
