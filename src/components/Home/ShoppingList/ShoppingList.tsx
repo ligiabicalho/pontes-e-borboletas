@@ -21,11 +21,9 @@ type Product = {
   quantity: number;
 };
 //TODO: Não encontrou? Encomende
-//TODO: Descrição como funciona outras economias
 //TODO: Modal inferior | carrinho
 //TODO: Buscar produto por nome
 //TODO: Buscar por categorias
-//TODO: Toast Copiado -> não precisa enviar comprovante.
 
 const ShoppingList = () => {
   const sortProducts = (products: Product[]) => {
