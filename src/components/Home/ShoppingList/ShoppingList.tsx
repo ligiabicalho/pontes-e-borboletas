@@ -16,7 +16,7 @@ type Product = {
   name: string;
   unit: string;
   price: number;
-  active: number;
+  active: boolean | number;
   availableQuantity: number;
   quantity: number;
 };
