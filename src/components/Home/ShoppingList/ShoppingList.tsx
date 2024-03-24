@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import productsList from "../../../db/productsList.json";
 import costTransparency from "../../../db/costTransparency.json";
 import contributionOptions from "../../../db/contributionOptions.json";
@@ -10,6 +10,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import QuantityControlButtons from "./QuantityControlButtons";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import SearchBar from "./SearchBar";
+
+const activeItems = productsList.filter((item) => item.active);
 
 type Product = {
   id: number;
@@ -19,46 +24,133 @@ type Product = {
   active: boolean | number;
   availableQuantity: number;
   quantity: number;
+  category: string;
 };
-//TODO: Não encontrou? Encomende
-//TODO: Modal inferior | carrinho
-//TODO: Buscar produto por nome
+
 //TODO: Buscar por categorias
 
-const ShoppingList = () => {
-  const sortProducts = (products: Product[]) => {
-    // organiza alfabeticamente
-    return products.sort((a, b) => a.name.localeCompare(b.name));
-  };
-  // FIXME: Manter ativo ou considerar stock??
-  // Seleciona só os items ativos
-  const activeItems = productsList.filter((item) => item.active);
-  const sortedProductsList = sortProducts(activeItems);
-
-  const [itemsList, setItemsList] = useState<Product[]>([
-    ...sortedProductsList,
-  ]);
+const ShoppingList: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<Product[]>([]);
   const [subTotalValue, setSubTotalValue] = useState<number>(0);
   const [totalToPay, setTotalToPay] = useState<number>(0);
-
+  const [searchQuery, setSearchQuery] = useState<string>();
+  const [isInputEmpty, setIsInputEmpty] = useState<boolean>(true);
+  type SearchType = "name" | "category";
+  const [searchType] = useState<SearchType>("name"); //TODO: setSearchType
   const contributionDefault = contributionOptions.find(
     (option) => option.default,
   )?.rate as number;
   const [contributionRate, setContributionRate] =
     useState<number>(contributionDefault);
 
-  const handleQuantityChange = (id: number, newQuantity: number) => {
-    const updatedItems = [...itemsList];
-    const itemToUpdate = updatedItems.find((item) => item.id === id);
-    if (itemToUpdate) {
-      itemToUpdate.quantity = newQuantity;
+  const sortAndSearchProducts = (
+    products: Product[],
+    searchQuery?: string,
+    searchType?: SearchType,
+  ): Product[] => {
+    let filteredProducts = products;
+
+    if (searchQuery && searchType) {
+      filteredProducts = filteredProducts.filter((product) => {
+        if (searchType === "name") {
+          return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+        } else {
+          return product.category.toLowerCase() === searchQuery.toLowerCase();
+        }
+      });
     }
-    selectedItems.push(itemToUpdate as Product);
-    setSelectedItems(selectedItems);
-    setItemsList(updatedItems);
-    calculateSubTotal(updatedItems);
+    // organiza alfabeticamente
+    const sortedProductsList = filteredProducts.sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
+    return sortedProductsList;
   };
+
+  const sortedProductsList = sortAndSearchProducts(
+    activeItems,
+    searchQuery,
+    searchType,
+  );
+
+  const [itemsList, setItemsList] = useState<Product[]>([
+    ...sortedProductsList,
+  ]);
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
+    setIsInputEmpty(value === "");
+    const result = sortAndSearchProducts(activeItems, searchQuery, searchType);
+    setItemsList(result);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setIsInputEmpty(true);
+    const result = sortAndSearchProducts(activeItems, "", searchType);
+    setItemsList(result);
+  };
+
+  const calculateTotalToPay = useCallback(
+    (subTotalValue: number, rate: number) => {
+      const contribution = Number(checkedContribution(subTotalValue, rate));
+      const newTotalToPay = (subTotalValue + contribution).toFixed(2);
+      const newTotalNumber = Number(newTotalToPay);
+
+      setTotalToPay(newTotalNumber);
+      return newTotalNumber;
+    },
+    [setTotalToPay],
+  );
+
+  const calculateSubTotal = useCallback(
+    (updatedItems: Product[]) => {
+      const newSubTotalValue = updatedItems
+        .reduce((acc, item) => acc + item.price * (item.quantity || 0), 0)
+        .toFixed(2);
+      const newSubTotalNumber = Number(newSubTotalValue);
+      setSubTotalValue(newSubTotalNumber);
+      calculateTotalToPay(newSubTotalNumber, contributionRate);
+    },
+    [setSubTotalValue, calculateTotalToPay, contributionRate],
+  );
+
+  const handleQuantityChange = useCallback(
+    (id: number, newQuantity: number) => {
+      setItemsList((prevItemsList) => {
+        const updatedItems = prevItemsList.map((item) =>
+          item.id === id ? { ...item, quantity: newQuantity } : item,
+        );
+        return updatedItems;
+      });
+
+      setSelectedItems((prevSelectedItems) => {
+        let updatedSelectedItems = [...prevSelectedItems];
+
+        if (updatedSelectedItems.some((item) => item.id === id)) {
+          if (newQuantity === 0) {
+            updatedSelectedItems = updatedSelectedItems.filter(
+              (selectedItem) => selectedItem.id !== id,
+            );
+          } else {
+            updatedSelectedItems = updatedSelectedItems.map((selectedItem) =>
+              selectedItem.id === id
+                ? { ...selectedItem, quantity: newQuantity }
+                : selectedItem,
+            );
+          }
+        } else {
+          const itemToAdd = itemsList.find((item) => item.id === id);
+          if (itemToAdd) {
+            updatedSelectedItems.push({ ...itemToAdd, quantity: newQuantity });
+          }
+        }
+
+        calculateSubTotal(updatedSelectedItems);
+        return updatedSelectedItems;
+      });
+    },
+    [itemsList, calculateSubTotal],
+  );
 
   const incrementQuantity = (id: number, quantity: number) => {
     const newQuantity = quantity + 1;
@@ -70,27 +162,9 @@ const ShoppingList = () => {
     handleQuantityChange(id, Math.max(0, newQuantity));
   };
 
-  const calculateSubTotal = (updatedItems: Product[]) => {
-    const newSubTotalValue = updatedItems
-      .reduce((acc, item) => acc + item.price * (item.quantity || 0), 0)
-      .toFixed(2);
-    const newSubTotalNumber = Number(newSubTotalValue);
-    setSubTotalValue(newSubTotalNumber);
-    calculateTotalToPay(newSubTotalNumber, contributionRate);
-  };
-
   const checkedContribution = (subTotalValue: number, rate: number) => {
     const contribution = (subTotalValue * (rate / 100)).toFixed(2);
     return contribution;
-  };
-
-  const calculateTotalToPay = (subTotalValue: number, rate: number) => {
-    const contribution = Number(checkedContribution(subTotalValue, rate));
-    const newTotalToPay = (subTotalValue + contribution).toFixed(2);
-    const newTotalNumber = Number(newTotalToPay);
-
-    setTotalToPay(newTotalNumber);
-    return newTotalNumber;
   };
 
   const handleContributionChange = (rate: number) => {
@@ -101,6 +175,12 @@ const ShoppingList = () => {
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:justify-evenly">
       <div className="flex flex-col items-center lg:w-[30%]">
+        <SearchBar
+          handleSearch={handleSearch}
+          searchQuery={searchQuery}
+          handleClearSearch={handleClearSearch}
+          isInputEmpty={isInputEmpty}
+        />
         <div className="overflow-x-auto">
           <table>
             <tbody className="divide-y divide-gray-200">
@@ -144,20 +224,15 @@ const ShoppingList = () => {
           </p>
           {!!subTotalValue && (
             <ul className="flex flex-col self-start w-full p-2 bg-white rounded-sm">
-              {itemsList.map(
-                (item) =>
-                  !!item.quantity && (
-                    <li key={item.id} className="flex justify-between">
-                      <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
-                      <span className="text-xs">{`R$${(
-                        item.quantity * item.price
-                      )
-                        .toFixed(2)
-                        .split(".")
-                        .join(",")}`}</span>
-                    </li>
-                  ),
-              )}
+              {selectedItems.map((item) => (
+                <li key={item.id} className="flex justify-between">
+                  <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
+                  <span className="text-xs">{`R$${(item.quantity * item.price)
+                    .toFixed(2)
+                    .split(".")
+                    .join(",")}`}</span>
+                </li>
+              ))}
             </ul>
           )}
         </div>
@@ -167,15 +242,16 @@ const ShoppingList = () => {
             {contributionOptions.map(
               (option) =>
                 option.id && (
-                  <label
-                    className="flex gap-1 my-1 text-sm"
+                  <Label
+                    className="flex items-center gap-1 py-1 text-sm"
                     htmlFor={`rate-${option.rate}`}
                     key={option.rate}
                   >
-                    <input
+                    <Input
                       id={`rate-${option.rate}`}
                       type="radio"
                       name="contribution"
+                      className="mr-1"
                       value={option.rate}
                       checked={contributionRate === option.rate}
                       onChange={() => handleContributionChange(option.rate)}
@@ -187,7 +263,7 @@ const ShoppingList = () => {
                       `(R$${checkedContribution(subTotalValue, option.rate)
                         .split(".")
                         .join(",")})`}
-                  </label>
+                  </Label>
                 ),
             )}
             <p className="italic text-xs py-2">
@@ -196,11 +272,9 @@ const ShoppingList = () => {
           </div>
         </fieldset>
         <div>
-          <Accordion type="single" collapsible className="shadow rounded-md">
+          <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
-              <AccordionTrigger className="text-xs">
-                {costTransparency[0].title}
-              </AccordionTrigger>
+              <AccordionTrigger>{costTransparency[0].title}</AccordionTrigger>
               <AccordionContent>
                 <p className="text-xs italic pb-2">
                   {costTransparency[0].description}
