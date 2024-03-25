@@ -2,6 +2,8 @@ import { Button } from "../ui/button";
 import { BottomBar } from "./BottomBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useShoppingListContext } from "@/contexts/shoppingListContext";
 
 type CheckoutProps = {
   subTotalValue: number;
@@ -18,6 +20,29 @@ export const CheckoutBottomBar = ({
   const currentPage = router.pathname;
   const targetPage = `${currentPage}#checkout`;
   const value = hasPixCode ? totalValue : subTotalValue;
+  const { isBottomBarVisible, setIsBottomBarVisible } =
+    useShoppingListContext();
+  useEffect(() => {
+    const targetElement = document.getElementById("checkout") as HTMLElement;
+
+    const checkScroll = () => {
+      if (window.scrollY > targetElement.offsetTop) {
+        setIsBottomBarVisible(false);
+      } else {
+        setIsBottomBarVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", checkScroll);
+
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+    };
+  }, [setIsBottomBarVisible]);
+
+  if (!isBottomBarVisible) {
+    return null;
+  }
 
   return (
     <BottomBar>
