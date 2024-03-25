@@ -73,7 +73,7 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
             <p>...</p>
           </div>
           <CopyToClipboardButton
-            text={data?.brCode}
+            text={data?.brCode as string}
             targetId={`#${targetId}`}
           />
         </div>
