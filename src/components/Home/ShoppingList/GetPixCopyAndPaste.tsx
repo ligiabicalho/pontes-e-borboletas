@@ -5,7 +5,15 @@ import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { Copy } from "lucide-react";
 
-const GetPixCopyAndPaste = ({ value }: { value: number }) => {
+type GetPixCopyAndPasteProps = {
+  value: number;
+  setHasPixCode: (value: boolean) => void;
+};
+
+const GetPixCopyAndPaste = ({
+  value,
+  setHasPixCode,
+}: GetPixCopyAndPasteProps) => {
   const { toast } = useToast();
   const targetId = "pix-brcode-copy-and-paste";
 
@@ -17,9 +25,11 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
   } = useMutation({
     mutationFn: getPixBrCode,
     onSuccess: (data) => {
+      setHasPixCode(true);
       console.log("code", data);
     },
     onError: (error) => {
+      setHasPixCode(false);
       toast({
         variant: "destructive",
         title: "Erro ao gerar QrCode Pix copia e cola.",
@@ -46,9 +56,10 @@ const GetPixCopyAndPaste = ({ value }: { value: number }) => {
       <p className="lg:mr-2 text-sm text-justify">
         Pague sua compra via{" "}
         <span className="text-sm font-semibold">Pix Copia e Cola</span>:
-        <br /> 1. gere o código
-        <br /> 2. o copie <Copy size={14} className="inline mx-1" />
-        <br /> 3. cole no App do seu banco.
+        <br /> 1. gere o código do Pix no botão abaixo
+        <br /> 2. copie o código gerado
+        <Copy size={14} className="inline mx-1" />
+        <br /> 3. cole-o no App do seu banco.
       </p>
       <Button
         aria-label="Gerar QrCode copia e cola"
