@@ -6,6 +6,7 @@ import { NextPage } from "next";
 import type { ReactElement, ReactNode } from "react";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import { Toaster } from "@/components/ui/toaster";
+import { ShoppingListProvider } from "@/contexts/shoppingListContext";
 
 export const queryClient = new QueryClient();
 
@@ -34,16 +35,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
   return (
     <QueryClientProvider client={queryClient}>
-      {getLayout(<Component {...pageProps} />)}
+      <ShoppingListProvider>
+        {getLayout(<Component {...pageProps} />)}
 
-      <Toaster />
+        <Toaster />
 
-      <style jsx global>{`
-        :root {
-          --font-primary: ${odibeeSans.style.fontFamily};
-          --font-secondary: ${titilliumWeb.style.fontFamily};
-        }
-      `}</style>
+        <style jsx global>{`
+          :root {
+            --font-primary: ${odibeeSans.style.fontFamily};
+            --font-secondary: ${titilliumWeb.style.fontFamily};
+          }
+        `}</style>
+      </ShoppingListProvider>
     </QueryClientProvider>
   );
 }

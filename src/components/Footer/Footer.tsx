@@ -1,10 +1,18 @@
+import { useShoppingListContext } from "@/contexts/shoppingListContext";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 export function Footer() {
+  const { isBottomBarVisible } = useShoppingListContext();
   return (
-    <div className="flex lg:flex-row flex-col bottom-0 w-full p-4 pt-8 items-center justify-between">
+    <div
+      className={cn(
+        "flex lg:flex-row flex-col bottom-0 w-full p-4 lg:pb-4 items-center justify-between",
+        isBottomBarVisible && "pb-20",
+      )}
+    >
       <div className="flex gap-4">
         <Image
           src="/logo-large.png"
