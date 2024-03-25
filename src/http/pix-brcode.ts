@@ -1,9 +1,9 @@
-import QRCodePixGeneratorService from "@/service/qRCodePixGenerator";
+import QRCodePixGeneratorService from "@/service/qrCodePixGenerator";
 import { creator, pix } from "../db/contacts.json";
 
 export const getPixBrCode = async (value: number) => {
   try {
-    const qRCodePixGenerator = new QRCodePixGeneratorService("01");
+    const qrCodePixGenerator = new QRCodePixGeneratorService("01");
     const payload = {
       name: creator,
       key: pix.key,
@@ -11,7 +11,7 @@ export const getPixBrCode = async (value: number) => {
       message: pix.message,
       // transactionId?: string;
     };
-    const { data, error } = await qRCodePixGenerator.generate({
+    const { data, error } = await qrCodePixGenerator.generate({
       ...payload,
       value,
     });
