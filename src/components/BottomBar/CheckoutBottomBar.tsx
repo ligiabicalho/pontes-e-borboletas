@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useShoppingListContext } from "@/contexts/shoppingListContext";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 type CheckoutProps = {
   subTotalValue: number;
@@ -48,22 +49,26 @@ export const CheckoutBottomBar = ({
 
   return (
     <BottomBar>
-      <div className="flex items-start space-x-2">
-        <p className="font-primary text-neutral-black text-right text-xs">
-          {hasPixCode ? "Total" : "Sub-total"}
+      <div className="flex w-full items-center gap-2 justify-between">
+        <p className="flex flex-col">
+          <span className="flex before:font-primary text-neutral-black text-right text-xs">
+            {hasPixCode ? "Total" : "Sub-total"}
+          </span>
+          <span className="text-xs text-secondary font-primary self-end">
+            R$
+          </span>
         </p>
 
         <p className="flex text-secondary font-primary">
-          <span className="text-xs">R$</span>
-          <span className="text-2xl pl-1">
+          <span className="text-2xl">
             {value.toFixed(2).split(".").join(",")}
           </span>
         </p>
+        <Link href={targetPage}>
+          <Button>Finalizar compra</Button>
+        </Link>
+        <ScrollToTopButton />
       </div>
-
-      <Link href={targetPage}>
-        <Button>Finalizar compra</Button>
-      </Link>
     </BottomBar>
   );
 };
