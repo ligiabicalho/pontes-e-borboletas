@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 import { BottomBar } from "./BottomBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useShoppingListContext } from "@/contexts/shoppingListContext";
 
 type CheckoutProps = {
@@ -19,7 +19,9 @@ export const CheckoutBottomBar = ({
   const router = useRouter();
   const currentPage = router.pathname;
   const targetPage = `${currentPage}#checkout`;
+
   const value = hasPixCode ? totalValue : subTotalValue;
+
   const { isBottomBarVisible, setIsBottomBarVisible } =
     useShoppingListContext();
   useEffect(() => {
