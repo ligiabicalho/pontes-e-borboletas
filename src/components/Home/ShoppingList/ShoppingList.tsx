@@ -14,19 +14,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import SearchBar from "./SearchBar";
 import { parseItemName } from "@/lib/parseItemName";
+import { Product } from "@/entities/product";
+import { CheckoutBottomBar } from "@/components/BottomBar/CheckoutBottomBar";
+import { ShoppingBasket } from "lucide-react";
 
 const activeItems = productsList.filter((item) => item.active);
-
-type Product = {
-  id: number;
-  name: string;
-  unit: string;
-  price: number;
-  active: boolean | number;
-  availableQuantity: number;
-  quantity: number;
-  category: string;
-};
 
 //TODO: Buscar por categorias
 
@@ -36,6 +28,7 @@ const ShoppingList: React.FC = () => {
   const [totalToPay, setTotalToPay] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<string>();
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(true);
+  const [hasPixCode, setHasPixCode] = useState<boolean>(false);
   type SearchType = "name" | "category";
   const [searchType] = useState<SearchType>("name"); //TODO: setSearchType
   const contributionDefault = contributionOptions.find(
@@ -174,134 +167,156 @@ const ShoppingList: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 lg:flex-row lg:justify-evenly">
-      <div className="flex flex-col items-center lg:w-[30%]">
-        <SearchBar
-          handleSearch={handleSearch}
-          searchQuery={searchQuery}
-          handleClearSearch={handleClearSearch}
-          isInputEmpty={isInputEmpty}
-        />
-        <div className="overflow-x-auto">
-          <table>
-            <tbody className="divide-y divide-gray-200">
-              {itemsList.map((item) => (
-                <tr key={item.id}>
-                  <td
-                    className={`flex flex-col py-2 whitespace-nowrap ${
-                      !!item.quantity && "bg-gray-100"
-                    }`}
-                  >
-                    <div className="flex justify-between w-fit">
-                      <span className="ml-2 text-sm font-medium text-gray-900 min-w-[220px]">
-                        {parseItemName(item.name, 25)}
-                      </span>
-                      <QuantityControlButtons
-                        itemId={item.id}
-                        quantity={item.quantity}
-                        availableQuantity={item.availableQuantity}
-                        incrementQuantity={incrementQuantity}
-                        decrementQuantity={decrementQuantity}
-                      />
-                    </div>
-                    <p className="flex ml-4 justify-between">
-                      <span className="whitespace-nowrap text-sm text-gray-500">
-                        R${item.price.toFixed(2).split(".").join(",")}/{" "}
-                        {item.unit}
-                      </span>
-                    </p>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-3 lg:w-[30%]">
-        <div>
-          <p className="italic self-start">
-            Sub-total: R${subTotalValue.toFixed(2).split(".").join(",")}
-          </p>
-          {!!subTotalValue && (
-            <ul className="flex flex-col self-start w-full p-2 bg-white rounded-sm">
-              {selectedItems.map((item) => (
-                <li key={item.id} className="flex justify-between">
-                  <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
-                  <span className="text-xs">{`R$${(item.quantity * item.price)
-                    .toFixed(2)
-                    .split(".")
-                    .join(",")}`}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        <fieldset>
-          <legend className="my-2">{contributionOptions[0].title}</legend>
-          <div className="px-2 gap-1">
-            {contributionOptions.map(
-              (option) =>
-                option.id && (
-                  <Label
-                    className="flex items-center gap-1 py-1 text-sm"
-                    htmlFor={`rate-${option.rate}`}
-                    key={option.rate}
-                  >
-                    <Input
-                      id={`rate-${option.rate}`}
-                      type="radio"
-                      name="contribution"
-                      className="mr-1"
-                      value={option.rate}
-                      checked={contributionRate === option.rate}
-                      onChange={() => handleContributionChange(option.rate)}
-                    />
-                    {!!option.rate && "Contribuição: "}
-                    {option.label}{" "}
-                    {!!option.rate &&
-                      !!subTotalValue &&
-                      `(R$${checkedContribution(subTotalValue, option.rate)
-                        .split(".")
-                        .join(",")})`}
-                  </Label>
-                ),
-            )}
-            <p className="italic text-xs py-2">
-              {contributionOptions[0].description}
-            </p>
+    <>
+      <div className="flex flex-col gap-4 lg:flex-row lg:justify-evenly lg:pt-4">
+        <div className="flex flex-col items-center lg:w-[30%]">
+          <SearchBar
+            handleSearch={handleSearch}
+            searchQuery={searchQuery}
+            handleClearSearch={handleClearSearch}
+            isInputEmpty={isInputEmpty}
+          />
+          <div className="overflow-x-auto">
+            <table>
+              <tbody className="divide-y divide-gray-200">
+                {itemsList.map((item) => (
+                  <tr key={item.id}>
+                    <td
+                      className={`flex flex-col py-2 whitespace-nowrap ${
+                        !!item.quantity && "bg-gray-100"
+                      }`}
+                    >
+                      <div className="flex justify-between w-fit">
+                        <span className="ml-2 text-sm font-medium text-gray-900 min-w-[220px]">
+                          {parseItemName(item.name, 25)}
+                        </span>
+                        <QuantityControlButtons
+                          itemId={item.id}
+                          quantity={item.quantity}
+                          availableQuantity={item.availableQuantity}
+                          incrementQuantity={incrementQuantity}
+                          decrementQuantity={decrementQuantity}
+                        />
+                      </div>
+                      <p className="flex ml-4 justify-between">
+                        <span className="whitespace-nowrap text-sm text-gray-500">
+                          R${item.price.toFixed(2).split(".").join(",")}/{" "}
+                          {item.unit}
+                        </span>
+                      </p>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </fieldset>
-        <div>
-          <Accordion type="single" collapsible>
-            <AccordionItem value="item-1">
-              <AccordionTrigger>{costTransparency[0].title}</AccordionTrigger>
-              <AccordionContent>
-                <p className="text-xs italic pb-2">
-                  {costTransparency[0].description}
-                </p>
-                <ul>
-                  {costTransparency.map(
-                    (item) =>
-                      item.id && (
-                        <li key={item.id} className="text-xs">
-                          {`${item.expense} (${item.cost})`}
-                        </li>
-                      ),
-                  )}
+        </div>
+        <div
+          id="checkout"
+          className="flex flex-col lg:grid grid-cols-2 lg:w-[70%] gap-x-8"
+        >
+          <div className="flex flex-col gap-3">
+            <p className="flex font-bold items-center">
+              <ShoppingBasket className="inline mr-2" /> Finalizar compra
+            </p>
+            <div>
+              <p className="italic self-start pb-2">
+                Sub-total: R${subTotalValue.toFixed(2).split(".").join(",")}
+              </p>
+              {!!subTotalValue && (
+                <ul className="flex flex-col self-start w-full p-2 bg-white rounded-sm">
+                  {selectedItems.map((item) => (
+                    <li key={item.id} className="flex justify-between">
+                      <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
+                      <span className="text-xs">{`R$${(
+                        item.quantity * item.price
+                      )
+                        .toFixed(2)
+                        .split(".")
+                        .join(",")}`}</span>
+                    </li>
+                  ))}
                 </ul>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+              )}
+            </div>
+            <fieldset>
+              <legend className="my-2">{contributionOptions[0].title}</legend>
+              <div className="px-2 gap-1">
+                {contributionOptions.map(
+                  (option) =>
+                    option.id && (
+                      <Label
+                        className="flex items-center gap-1 py-1 text-sm"
+                        htmlFor={`rate-${option.rate}`}
+                        key={option.rate}
+                      >
+                        <Input
+                          id={`rate-${option.rate}`}
+                          type="radio"
+                          name="contribution"
+                          className="mr-1"
+                          value={option.rate}
+                          checked={contributionRate === option.rate}
+                          onChange={() => handleContributionChange(option.rate)}
+                        />
+                        {!!option.rate && "Contribuição: "}
+                        {option.label}{" "}
+                        {!!option.rate &&
+                          !!subTotalValue &&
+                          `(R$${checkedContribution(subTotalValue, option.rate)
+                            .split(".")
+                            .join(",")})`}
+                      </Label>
+                    ),
+                )}
+                <p className="italic text-xs py-1">
+                  {contributionOptions[0].description}
+                </p>
+              </div>
+            </fieldset>
+            <div className="pb-4">
+              <Accordion type="single" collapsible>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>
+                    {costTransparency[0].title}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-xs italic pb-2">
+                      {costTransparency[0].description}
+                    </p>
+                    <ul>
+                      {costTransparency.map(
+                        (item) =>
+                          item.id && (
+                            <li key={item.id} className="text-xs">
+                              {`${item.expense} (${item.cost})`}
+                            </li>
+                          ),
+                      )}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </div>
+
+          <div className="flex flex-col py-2">
+            <p className="py-2 font-bold text-center bg-white border-2 rounded-sm">
+              Total a pagar: R$ {totalToPay.toFixed(2).split(".").join(",")}
+            </p>
+            <GetPixCopyAndPaste
+              value={Number(totalToPay)}
+              setHasPixCode={setHasPixCode}
+            />
+          </div>
         </div>
       </div>
-      <div className="lg:w-[30%]">
-        <p className="py-2 font-bold text-center bg-white border-2 rounded-sm">
-          Total a pagar: R$ {totalToPay.toFixed(2).split(".").join(",")}
-        </p>
-        <GetPixCopyAndPaste value={Number(totalToPay)} />
-      </div>
-    </div>
+      <CheckoutBottomBar
+        subTotalValue={subTotalValue}
+        totalValue={totalToPay}
+        hasPixCode={hasPixCode}
+      />
+    </>
   );
 };
 
