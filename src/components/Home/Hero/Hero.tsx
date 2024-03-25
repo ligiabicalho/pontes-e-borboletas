@@ -11,7 +11,7 @@ import {
 export default function Hero() {
   const activeFair = fairs.find((fair) => fair.active);
   return (
-    <section className="flex flex-col bg-gradient p-8 pt-20 min-h-screen lg:px-0">
+    <section className="flex flex-col bg-gradient px-8 pt-20 min-h-screen lg:px-0">
       <div className="lg:container flex flex-col justify-around gap-y-3">
         <div className="flex flex-col items-center pb-2">
           <h1 className="font-bold text-xl">{heroTexts.title}</h1>
