@@ -13,6 +13,7 @@ import QuantityControlButtons from "./QuantityControlButtons";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import SearchBar from "./SearchBar";
+import { parseItemName } from "@/lib/parseItemName";
 
 const activeItems = productsList.filter((item) => item.active);
 
@@ -191,9 +192,9 @@ const ShoppingList: React.FC = () => {
                       !!item.quantity && "bg-gray-100"
                     }`}
                   >
-                    <div className="flex justify-between">
-                      <span className="ml-2 text-sm font-medium text-gray-900">
-                        {item.name}
+                    <div className="flex justify-between w-fit">
+                      <span className="ml-2 text-sm font-medium text-gray-900 min-w-[220px]">
+                        {parseItemName(item.name, 25)}
                       </span>
                       <QuantityControlButtons
                         itemId={item.id}
