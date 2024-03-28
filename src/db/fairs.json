@@ -1,37 +1,62 @@
 [
 	{
 		"id": 1,
-		"name": "Feira Outra encontra Crocco Veg",
-		"location": "Crocco Veg Restaurante",
-		"address": "R. Ceará, 1942, Savassi, BH/MG",
-		"frequency": "Quintas e sábados",
-		"openingHours": "9h às 15h",
+		"name": "CroccoVeg",
+		"location": "Cozinha Natural CroccoVeg",
+		"address": "R. Ceará, 1942, Savassi",
+		"weekdays": "Quintas e sábados",
+    "weekdaysNum": [5, 7],
+		"openingHours": "11h às 15h",
 		"active": false
 	},
 	{
 		"id": 2,
-		"name": "Feira Outra encontra Viveg",
+		"name": "Viveg",
 		"location": "Viveg Queijaria",
-		"address": "Rua Alves Pinto, 99, Grajaú, BH/MG",
-		"frequency": "Sextas-feiras",
+		"address": "R. Alves Pinto, 99, Grajaú",
+		"weekdays": "Sextas-feiras",
+    "weekdaysNum": [6],
 		"openingHours": "9h às 17h",
 		"active": false
 	},
 	{
 		"id": 3,
-		"name": "Feira Outra encontra Sagarana",
-		"location": "Sagarana Empório",
-		"address": "Rua da Bahia, 1886, Lourdes, BH/MG",
-		"frequency": "Terças-feiras",
-		"openingHours": "10hs às 17hs",
+		"name": "Sagarana",
+		"location": "Empório Sagarana",
+		"address": "R. da Bahia, 1886, Lourdes",
+		"weekdays": "Terças-feiras",
+    "weekdaysNum": [3],
+		"openingHours": "10h às 17h",
 		"active": false
 	},
-	{	"id": 4,
-		"name": "",
-		"location": "",
-		"address": "",
-		"frequency": "",
-		"openingHours": "",
+	{	
+    "id": 4,
+		"name": "Escola da Serra",
+		"location": "Escola da Serra",
+		"address": "R. do Ouro, 1900, Serra",
+		"weekdays": "Segundas",
+    "weekdaysNum": [2],
+		"openingHours": "12h às 19h",
+		"active": false
+	},
+  {	
+    "id": 5,
+		"name": "Balão Vermelho",
+		"location": "Colégio Balão Vermelho",
+		"address": "R. Djalma Guimarães, 140, Mangabeiras",
+		"weekdays": "Quartas",
+    "weekdaysNum": [4],
+		"openingHours": "12h às 19h",
+		"active": false
+	},
+  {	
+    "id": 6,
+		"name": "Paróquia de Santana",
+		"location": "Café da Pastoral do Dízimo e Encontro do Pastel",
+		"address": "R. Bernardo Figueiredo, 131, Serra",
+		"weekdays": "2º e 4º Domingos",
+    "weekdaysNum": [8],
+		"openingHours": "10h e 20h",
 		"active": false
 	}
 ]
