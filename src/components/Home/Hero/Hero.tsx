@@ -32,11 +32,15 @@ export default function Hero() {
               <AccordionTrigger>{item.title}</AccordionTrigger>
               <AccordionContent>
                 <p className="text-xs text-justify pb-2">{item.description}</p>
-                {item.metadata.map((data, i) => (
-                  <p key={i} className="text-xs">
-                    {data}
-                  </p>
-                ))}
+                <ul>
+                  {item.metadata.map((data, i) => (
+                    <li
+                      key={i}
+                      className="text-xs"
+                      dangerouslySetInnerHTML={{ __html: data }}
+                    ></li>
+                  ))}
+                </ul>
               </AccordionContent>
             </AccordionItem>
           ))}
