@@ -1,16 +1,16 @@
 import CopyToClipboardButton from "./CopyToClipboardButton";
-import { getPixBrCode } from "../../../http/pix-brcode";
-import { Button } from "../../ui/button";
+import { getPixBrCode } from "../../../../http/pix-brcode";
+import { Button } from "../../../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { Copy } from "lucide-react";
 
-type GetPixCopyAndPasteProps = {
+type GeneratePixCodeProps = {
   value: number;
   setHasPixCode: (value: boolean) => void;
 };
 
-const GetPixCopyAndPaste: React.FC<GetPixCopyAndPasteProps> = ({
+const GeneratePixCode: React.FC<GeneratePixCodeProps> = ({
   value,
   setHasPixCode,
 }) => {
@@ -97,4 +97,4 @@ const GetPixCopyAndPaste: React.FC<GetPixCopyAndPasteProps> = ({
   );
 };
 
-export default GetPixCopyAndPaste;
+export default GeneratePixCode;

@@ -1,5 +1,5 @@
-import { Button } from "../ui/button";
-import { BottomBar } from "./BottomBar";
+import { Button } from "../../ui/button";
+import { BottomBar } from "../../BottomBar/BottomBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -25,6 +25,7 @@ export const CheckoutBottomBar = ({
 
   const { isBottomBarVisible, setIsBottomBarVisible } =
     useShoppingListContext();
+
   useEffect(() => {
     const targetElement = document.getElementById("checkout") as HTMLElement;
 
