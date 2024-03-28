@@ -1,29 +1,56 @@
-[
-	{ 	"title": "Transparência dos nossos custos",
-		"description": ""
-	},
-	{	"id": 1,
-		"expense": "luz", 
-		"cost": "R$290,00"
-	},
-	{	"id": 2,
-		"expense": "água", 
-		"cost": "R$220,00"
-	},
-	{	"id": 3,
-		"expense": "internet e telefonia ", 
-		"cost": "R$170,00"
-	},
-	{	"id": 4,
-		"expense": "frete", 
-		"cost": "R$450,00"
-	},
-	{	"id": 5,
-		"expense": "mídias digitais", 
-		"cost": "R$340,00"
-	},
-	{	"id": 6,
-		"expense": "equipe: 01 Armazém, 07 feiras por semana, 05 dias de Cozinha para população em situação de rua", 
-		"cost": "R$10.320,00"
-	}
-]
+{ 
+  "title": "Transparência dos nossos custos",
+  "description": "",
+  "types": [
+    {
+      "title": "Despesas Adm./Operação: R$1.984,00",
+      "items": [
+        {	
+          "id": 1,
+          "name": "Luz", 
+          "cost": "R$300,00"
+        },
+        {	
+          "id": 2,
+          "name": "Água", 
+          "cost": "R$230,00"
+        },
+        {	
+          "id": 3,
+          "name": "Internet e telefonia", 
+          "cost": "R$204,00"
+        },
+        {	
+          "id": 4,
+          "name": "Frete e deslocamento", 
+          "cost": "R$1.250,00"
+        }
+      ]
+    },
+    {
+      "title": "Remuneração Colab. IPB: R$9.552,00",
+      "items": [
+        {	
+          "id": 1,
+          "name": "Armazém", 
+          "cost": "R$2.664,00"
+        },
+        {	
+          "id": 2,
+          "name": "Feiras", 
+          "cost": "R$3.168,00"
+        },
+        {	
+          "id": 3,
+          "name": "Cozinha", 
+          "cost": "R$2.520,00"
+        },
+        {	
+          "id": 4,
+          "name": "Comunicação", 
+          "cost": "R$1.200,00"
+        }
+      ]
+    }
+  ]
+}
