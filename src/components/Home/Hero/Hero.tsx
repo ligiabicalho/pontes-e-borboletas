@@ -22,25 +22,31 @@ export default function Hero() {
           <div>
             <p className="text-[16px]">Local: {activeFair.location} </p>
             <p className="text-[16px]">
-              {activeFair.frequency} de {activeFair.openingHours}
+              {activeFair.weekdays} de {activeFair.openingHours}
             </p>
           </div>
         )}
+
         <Accordion type="single" collapsible>
           {heroTexts.accordions.map((item, i) => (
             <AccordionItem key={i} value={item.title} className="my-1">
               <AccordionTrigger>{item.title}</AccordionTrigger>
               <AccordionContent>
                 <p className="text-xs text-justify pb-2">{item.description}</p>
-                {item.metadata.map((data, i) => (
-                  <p key={i} className="text-xs">
-                    {data}
-                  </p>
-                ))}
+                <ul>
+                  {item.metadata.map((data, i) => (
+                    <li
+                      key={i}
+                      className="text-xs"
+                      dangerouslySetInnerHTML={{ __html: data }}
+                    ></li>
+                  ))}
+                </ul>
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
+
         <ShoppingList />
       </div>
     </section>

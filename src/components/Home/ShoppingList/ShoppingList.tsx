@@ -1,22 +1,17 @@
 import { useCallback, useState } from "react";
 import productsList from "../../../db/productsList.json";
-import costTransparency from "../../../db/costTransparency.json";
 import contributionOptions from "../../../db/contributionOptions.json";
-import GetPixCopyAndPaste from "./GetPixCopyAndPaste";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import GeneratePixCode from "../Checkout/Pix/GeneratePixCode";
+
 import QuantityControlButtons from "./QuantityControlButtons";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import SearchBar from "./SearchBar";
 import { parseItemName } from "@/lib/parseItemName";
 import { Product } from "@/entities/product";
-import { CheckoutBottomBar } from "@/components/BottomBar/CheckoutBottomBar";
+import { CheckoutBottomBar } from "@/components/Home/Checkout/CheckoutBottomBar";
 import { ShoppingBasket } from "lucide-react";
+import CostTransparency from "./CostTransparency";
 
 const activeItems = productsList.filter((item) => item.active);
 
@@ -275,28 +270,7 @@ const ShoppingList: React.FC = () => {
               </div>
             </fieldset>
             <div className="pb-4">
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    {costTransparency[0].title}
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="text-xs italic pb-2">
-                      {costTransparency[0].description}
-                    </p>
-                    <ul>
-                      {costTransparency.map(
-                        (item) =>
-                          item.id && (
-                            <li key={item.id} className="text-xs">
-                              {`${item.expense} (${item.cost})`}
-                            </li>
-                          ),
-                      )}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+              <CostTransparency />
             </div>
           </div>
 
@@ -304,7 +278,7 @@ const ShoppingList: React.FC = () => {
             <p className="py-2 font-bold text-center bg-white border-2 rounded-sm">
               Total a pagar: R$ {totalToPay.toFixed(2).split(".").join(",")}
             </p>
-            <GetPixCopyAndPaste
+            <GeneratePixCode
               value={Number(totalToPay)}
               setHasPixCode={setHasPixCode}
             />

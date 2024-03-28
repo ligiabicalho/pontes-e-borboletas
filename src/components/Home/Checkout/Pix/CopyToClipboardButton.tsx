@@ -3,12 +3,14 @@ import { Copy, CopyCheck } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
-const CopyToClipboardButton = ({
-  text,
-  targetId,
-}: {
+type CopyToClipboardButtonProps = {
   text: string;
   targetId: string;
+};
+
+const CopyToClipboardButton: React.FC<CopyToClipboardButtonProps> = ({
+  text,
+  targetId,
 }) => {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();

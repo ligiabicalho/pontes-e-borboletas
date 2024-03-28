@@ -8,13 +8,13 @@ type QuantityControlButtonsProps = {
   decrementQuantity: (id: number, quantity: number) => void;
 };
 
-const QuantityControlButtons = ({
+const QuantityControlButtons: React.FC<QuantityControlButtonsProps> = ({
   itemId,
   quantity,
   availableQuantity,
   incrementQuantity,
   decrementQuantity,
-}: QuantityControlButtonsProps) => {
+}) => {
   return (
     <div className="flex gap-2">
       {quantity > 0 ? (
