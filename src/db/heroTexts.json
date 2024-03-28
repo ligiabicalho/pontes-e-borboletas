@@ -5,11 +5,11 @@
     "title": "Funcionamento da Feira Autogerida",
     "description": "Somos uma feira de comércio justo e nosso modo de funcionamento é a autogestão. Isto permite e convoca para coparticipação! O que engaja comunidade e liberdade. Além de desdobrar outros afetos da micropolítica como transparência e confiança.",
     "metadata": [
-      "1º Escolha seus produtos",
-      "2º Aprenda e pratique o cálculo das Outras Economias:",
-      "2.1 Valor de custo dos produtos = valor do custo da produção + o lucro da produtora",
-      "2.2 Valor das Outras Economias IPB = acrescente + 30% ao valor total da sua compra.",
-      "3º Pague com Pix."
+      "<span class='text-xs font-bold'>1º</span> Escolha seus produtos",
+      "<span class='text-xs font-bold'>2º</span> Aprenda e pratique o cálculo das Outras Economias:",
+      "<span class='text-xs pl-2'>\u2022</span> Valor de custo dos produtos <span class='text-xs font-bold'>=</span> valor do custo da produção <span class='text-xs font-bold'>+</span> a renda da produtora",
+      "<span class='text-xs pl-2'>\u2022</span> Valor das Outras Economias IPB <span class='text-xs font-bold'>=</span> acrescente 30% ao valor total da sua compra.",
+      "<span class='text-xs font-bold'>3º</span> Pague com Pix Copia e Cola."
     ]
   }, 
   {
