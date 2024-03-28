@@ -22,10 +22,11 @@ export default function Hero() {
           <div>
             <p className="text-[16px]">Local: {activeFair.location} </p>
             <p className="text-[16px]">
-              {activeFair.frequency} de {activeFair.openingHours}
+              {activeFair.weekdays} de {activeFair.openingHours}
             </p>
           </div>
         )}
+
         <Accordion type="single" collapsible>
           {heroTexts.accordions.map((item, i) => (
             <AccordionItem key={i} value={item.title} className="my-1">
@@ -45,6 +46,7 @@ export default function Hero() {
             </AccordionItem>
           ))}
         </Accordion>
+
         <ShoppingList />
       </div>
     </section>
