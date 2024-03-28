@@ -9,8 +9,8 @@ export function Footer() {
   return (
     <div
       className={cn(
-        "flex lg:flex-row flex-col bottom-0 w-full p-4 lg:pb-4 items-center justify-between",
-        isBottomBarVisible && "pb-20",
+        "flex lg:flex-row flex-col bottom-0 w-full px-4 pb-2 pt-6 lg:pb-4 items-center justify-between",
+        isBottomBarVisible,
       )}
     >
       <div className="flex gap-4">
