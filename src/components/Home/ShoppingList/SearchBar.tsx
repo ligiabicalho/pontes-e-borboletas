@@ -16,12 +16,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
   isInputEmpty,
 }) => {
   return (
-    <div className="flex flex-col items-center">
-      <Label className="relative flex py-1 text-sm" htmlFor="search">
+    <div className="flex flex-col items-center w-full">
+      <Label className="relative flex py-1 text-sm w-full" htmlFor="search">
         <Input
           id="search"
-          type="text"
-          placeholder="Pesquisar por nome do produto"
+          type="search"
+          placeholder="Pesquisar"
           value={searchQuery}
           onChange={(e: any) => handleSearch(e.target.value)}
           className="border mb-2 pl-2"
