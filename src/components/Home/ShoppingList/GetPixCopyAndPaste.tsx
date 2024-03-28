@@ -10,10 +10,10 @@ type GetPixCopyAndPasteProps = {
   setHasPixCode: (value: boolean) => void;
 };
 
-const GetPixCopyAndPaste = ({
+const GetPixCopyAndPaste: React.FC<GetPixCopyAndPasteProps> = ({
   value,
   setHasPixCode,
-}: GetPixCopyAndPasteProps) => {
+}) => {
   const { toast } = useToast();
   const targetId = "pix-brcode-copy-and-paste";
 

@@ -8,6 +8,7 @@ type SearchBarProps = {
   handleClearSearch: (event: any) => void;
   isInputEmpty: boolean;
 };
+
 const SearchBar: React.FC<SearchBarProps> = ({
   handleSearch,
   searchQuery,
