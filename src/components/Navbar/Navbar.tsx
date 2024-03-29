@@ -85,7 +85,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <div className={cn("w-full fixed z-navbar", bgColor)}>
+    <div className={cn("w-full fixed z-50", bgColor)}>
       <div className="container flex items-center justify-between py-3">
         <div className="hidden lg:flex">
           <Link href="/">
