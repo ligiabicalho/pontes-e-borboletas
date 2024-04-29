@@ -7,6 +7,7 @@ import type { ReactElement, ReactNode } from "react";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import { Toaster } from "@/components/ui/toaster";
 import { ShoppingListProvider } from "@/contexts/shoppingListContext";
+import { Analytics } from "@vercel/analytics/react";
 
 export const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <QueryClientProvider client={queryClient}>
       <ShoppingListProvider>
         {getLayout(<Component {...pageProps} />)}
+        <Analytics />
 
         <Toaster />
 
