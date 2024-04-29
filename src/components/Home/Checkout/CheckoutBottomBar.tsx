@@ -28,7 +28,7 @@ export const CheckoutBottomBar = ({
 
   useEffect(() => {
     const heightToInvisible =
-      document.documentElement.scrollHeight - 1.5 * window.innerHeight;
+      document.documentElement.scrollHeight - 1.05 * window.innerHeight;
 
     const checkScroll = () => {
       if (window.scrollY > heightToInvisible) {

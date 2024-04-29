@@ -23,7 +23,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
           type="text"
           placeholder="Pesquisar"
           value={searchQuery}
-          onChange={(e: any) => handleSearch(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleSearch(e.target.value)
+          }
           className="border mb-2 pl-2"
         />
         <div className="absolute right-1 top-5 transform -translate-y-3 flex h-8 w-8 items-center justify-center">
@@ -33,7 +35,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <X
               cursor="pointer"
               size={36}
-              color="gray"
+              color="#2d4f86"
+              strokeWidth={2.5}
               className="p-2"
               onClick={handleClearSearch}
             />
