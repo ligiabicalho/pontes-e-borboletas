@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [App de Vendas - Feira Outras](https://pontes-e-borboletas.vercel.app/ "Clique para acessar")
 
-## Getting Started
+## Instituto Pontes e Borboletas (IPB)
 
-First, run the development server:
+O Instituto Pontes e Borboletas é um território coletivo de práticas de (a) comércio justo de feiras e armazém agroecológicos; (b) cozinha de uso integral de alimentos; (c) e hortas urbanas.  
+É a experiência de correalização de um território coletivo: auto-organizado e cooperativista. Auto-organizado não apenas enquanto autogestão de seu espaço-arena, que acolhe e correaliza vivências e vozes, mas, também, enquanto promotor e incentivador de auto-organização civil e das causas sociais em prol dos serviços públicos-políticos, portanto, coletivos.  
+Uma iniciativa de economia política ecológica e ecologia política econômica. Seu território social é o bairro da Serra em Belo Horizonte, na região Centro-Sul da cidade. A partir desse território social e coletivo, em coconstrução e realização, aplicam as seguintes conceitua-ações que norteiam as práticas do Instituto:  
+● Agroecologia e Segurança Alimentar;  
+● Outras economias (Comércio Justo, Economia Circular e Economia Local, multimoedas);  
+● Decrescimento e Bem Viver.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Possibilidades para saber mais do IPB:  
+[Instagram IPB](https://www.instagram.com/ponteseborboletas/)  
+[Vídeo - IPB: O que é?](https://www.youtube.com/watch?v=Xi6loNyKHrI "Youtube - IPB: O que é?")  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## App de Vendas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Estou desenvolvendo um sistema para melhorar a experiência de compra nas feiras autogeridas promovidas pelo Instituto Pontes e Borboletas, em Belo Horizonte.  
+Essas feiras ocorrem em espaços parceiros, mas sem a presença constante de um atendente para intermediar a venda.  
+A proposta do App é substituir (e/ou complementar) as informações exposta em um quadro, para aumentar a adesão nas feiras e o respectivo pagamento dos itens da agricultura familiar.  
+Apesar de ser nomeado como "App", o sistema é um site responsivo, pensado em ser usado primordialmente em celulares.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Implementado
 
-## Learn More
+Através do App já é possível consultar os valores dos itens, inserí-los na cesta, optar por incluir o valor de contribuição e gerar Pix Copia e Cola (já com a chave e valor total a pagar).  
+O usuário também pode consultar os dias e locais das outras feiras, saber sobre a proposta das Outras Economias e o IPB, além da transparência dos custos.  
 
-To learn more about Next.js, take a look at the following resources:
+### Em desenvolvimento
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Gestão do estoque e das vendas de cada feira separadamente.  
+Acesso do usuário a uma página de cada feira separadamente.  
+Possibilidade de encomendar itens para feiras futuras.  
+Cadastrar para recebimento de newsletter e outras notificações.  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  
