@@ -17,12 +17,17 @@ Possibilidades para saber mais do IPB:
 
 Estou desenvolvendo um sistema para melhorar a experiência de compra nas feiras autogeridas promovidas pelo Instituto Pontes e Borboletas, em Belo Horizonte.  
 Essas feiras ocorrem em espaços parceiros, mas sem a presença constante de um atendente para intermediar a venda.  
-A proposta do App é substituir (e/ou complementar) as informações exposta em um quadro, para aumentar a adesão nas feiras e o respectivo pagamento dos itens da agricultura familiar.  
+A proposta do App é oferecer ao usuário acesso aos valores dos items, como também complementar as informações que ficam exposta em um quadro/cartaz, para aumentar a adesão e compreensão sobre o funcionamento das feiras e o respectivo pagamento dos itens da agricultura familiar.  
 Apesar de ser nomeado como "App", o sistema é um site responsivo, pensado em ser usado primordialmente em celulares.
 
 ### Implementado
 
-Através do App já é possível consultar os valores dos itens, inserí-los na cesta, optar por incluir o valor de contribuição e gerar Pix Copia e Cola (já com a chave e valor total a pagar).  
+Através do App já é possível:  
+- consultar os valores dos itens,  
+- inserí-los na cesta,  
+- optar por incluir o valor de contribuição e  
+- gerar Pix Copia e Cola (já com a chave e valor total a pagar).
+
 O usuário também pode consultar os dias e locais das outras feiras, saber sobre a proposta das Outras Economias e o IPB, além da transparência dos custos.  
 
 ### Em desenvolvimento
