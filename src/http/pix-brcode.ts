@@ -1,7 +1,8 @@
 import QRCodePixGeneratorService from "@/service/qrCodePixGenerator";
-import { creator, pix } from "../db/contacts.json";
+import contacts from "../db/contacts.json";
 
 export const getPixBrCode = async (value: number) => {
+  const { creator, pix } = contacts;
   try {
     const qrCodePixGenerator = new QRCodePixGeneratorService("01");
     const payload = {
