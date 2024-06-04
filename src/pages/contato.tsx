@@ -1,14 +1,5 @@
 import * as React from "react";
-import {
-  creator,
-  whatsapp,
-  instagram,
-  linktree,
-  phone,
-  email,
-  storage,
-  pix,
-} from "../db/contacts.json";
+import contacts from "../db/contacts.json";
 import Link from "next/link";
 import {
   CalendarClock,
@@ -26,6 +17,8 @@ import {
 } from "lucide-react";
 
 export default function Contact() {
+  const { creator, whatsapp, instagram, linktree, phone, email, storage, pix } =
+    contacts;
   const icons: LucideIcon[] = [
     Store,
     MapPin,
