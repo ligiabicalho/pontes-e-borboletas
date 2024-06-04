@@ -27,10 +27,11 @@ export const CheckoutBottomBar = ({
     useShoppingListContext();
 
   useEffect(() => {
-    const targetElement = document.getElementById("checkout") as HTMLElement;
+    const heightToInvisible =
+      document.documentElement.scrollHeight - 1.05 * window.innerHeight;
 
     const checkScroll = () => {
-      if (window.scrollY > targetElement.offsetTop) {
+      if (window.scrollY > heightToInvisible) {
         setIsBottomBarVisible(false);
       } else {
         setIsBottomBarVisible(true);

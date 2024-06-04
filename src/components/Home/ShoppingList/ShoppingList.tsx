@@ -21,7 +21,7 @@ const ShoppingList: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<Product[]>([]);
   const [subTotalValue, setSubTotalValue] = useState<number>(0);
   const [totalToPay, setTotalToPay] = useState<number>(0);
-  const [searchQuery, setSearchQuery] = useState<string>();
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(true);
   const [hasPixCode, setHasPixCode] = useState<boolean>(false);
   type SearchType = "name" | "category";
@@ -208,10 +208,10 @@ const ShoppingList: React.FC = () => {
         </div>
         <div
           id="checkout"
-          className="flex flex-col lg:grid grid-cols-2 lg:w-[70%] gap-x-8"
+          className="flex flex-col lg:grid grid-cols-2 lg:w-[70%] gap-x-8 pt-4"
         >
           <div className="flex flex-col gap-3">
-            <p className="flex font-bold items-center">
+            <p className="flex font-bold items-center py-2">
               <ShoppingBasket className="inline mr-2" /> Finalizar compra
             </p>
             <div>
@@ -235,7 +235,7 @@ const ShoppingList: React.FC = () => {
               )}
             </div>
             <fieldset>
-              <legend className="my-2">{contributionOptions[0].title}</legend>
+              <legend className="py-2">{contributionOptions[0].title}</legend>
               <div className="px-2 gap-1">
                 {contributionOptions.map(
                   (option) =>
