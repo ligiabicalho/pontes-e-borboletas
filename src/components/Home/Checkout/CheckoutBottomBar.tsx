@@ -67,7 +67,7 @@ export const CheckoutBottomBar = ({
           </span>
         </p>
         <Link href={targetPage}>
-          <Button>Finalizar compra</Button>
+          <Button variant="purple-yellow">Finalizar compra</Button>
         </Link>
         <ScrollToTopButton />
       </div>

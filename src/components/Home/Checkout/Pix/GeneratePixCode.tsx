@@ -62,8 +62,8 @@ const GeneratePixCode: React.FC<GeneratePixCodeProps> = ({
         <br /> 3. cole-o no App do seu banco.
       </p>
       <Button
+        variant="purple-yellow"
         aria-label="Gerar QrCode copia e cola"
-        className="bg-purple-700 text-yellow-300 p-4 rounded-sm shadow-md shadow-purple-400 hover:bg-purple-600 focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
         onClick={handleClickGetPixQrCode}
         disabled={isLoading || !value}
       >
