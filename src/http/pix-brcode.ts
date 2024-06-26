@@ -1,10 +1,9 @@
-import QRCodePixGeneratorService from "@/service/qrCodePixGenerator";
 import contacts from "../db/contacts.json";
+import qrCodePixGenerator from "@/service/qrCodePixGenerator/pixGeneratorSingleton";
 
 export const getPixBrCode = async (value: number) => {
   const { creator, pix } = contacts;
   try {
-    const qrCodePixGenerator = new QRCodePixGeneratorService("01");
     const payload = {
       name: creator,
       key: pix.key,
