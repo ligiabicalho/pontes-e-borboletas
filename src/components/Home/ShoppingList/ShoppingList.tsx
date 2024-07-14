@@ -210,7 +210,7 @@ const ShoppingList: React.FC = () => {
                       </div>
                       <p className="flex ml-4 justify-between">
                         <span className="whitespace-nowrap text-sm text-gray-500">
-                          R${item.price.toFixed(2).split(".").join(",")}/{" "}
+                          R${item.priceIpb.toFixed(2).split(".").join(",")}/{" "}
                           {item.unit}
                         </span>
                       </p>
