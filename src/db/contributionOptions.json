@@ -1,8 +1,7 @@
-[
-  {
-    "title": "Valor das Outras Economias IPB",
-    "description": "Escolher contribuir ou não é livre porque a sua decisão é outra economia com a gente!"
-  },
-  { "id": 1, "rate": 20, "label": "20%", "default": true },
-  { "id": 2, "rate": 0, "label": "Não desejo contribuir.", "default": false }
-]
+{
+  "title": "Valor das Outras Economias IPB",
+  "description": "Escolher contribuir ou não é livre porque a sua decisão é outra economia com a gente!",
+  "options": [
+    { "id": 1, "rate": -20, "label": "Prefiro não contribuir, e aguardar e compreender melhor", "default": false }
+  ]
+}

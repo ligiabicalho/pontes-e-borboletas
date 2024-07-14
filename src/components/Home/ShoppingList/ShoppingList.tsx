@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import productsList from "../../../db/productsList.json";
-import contributionOptions from "../../../db/contributionOptions.json";
+import contribution from "../../../db/contributionOptions.json";
 import GeneratePixCode from "../Checkout/Pix/GeneratePixCode";
 
 import QuantityControlButtons from "./QuantityControlButtons";
@@ -26,9 +26,9 @@ const ShoppingList: React.FC = () => {
   const [hasPixCode, setHasPixCode] = useState<boolean>(false);
   type SearchType = "name" | "category";
   const [searchType] = useState<SearchType>("name"); //TODO: setSearchType
-  const contributionDefault = contributionOptions.find(
-    (option) => option.default,
-  )?.rate as number;
+
+  const contributionDefault =
+    contribution.options.find((option) => option.default)?.rate || 0;
   const [contributionRate, setContributionRate] =
     useState<number>(contributionDefault);
 
@@ -79,17 +79,25 @@ const ShoppingList: React.FC = () => {
     setItemsList(result);
   };
 
-  const calculateTotalToPay = useCallback(
-    (subTotalValue: number, rate: number) => {
-      const contribution = Number(checkedContribution(subTotalValue, rate));
-      const newTotalToPay = (subTotalValue + contribution).toFixed(2);
-      const newTotalNumber = Number(newTotalToPay);
+  const checkedContribution = useCallback(() => {
+    const contribution = (subTotalValue * (contributionRate / 100)).toFixed(2);
+    return contribution;
+  }, [subTotalValue, contributionRate]);
 
-      setTotalToPay(newTotalNumber);
-      return newTotalNumber;
-    },
-    [setTotalToPay],
-  );
+  const calculateTotalToPay = useCallback(() => {
+    console.log("subTotalValue", subTotalValue);
+    console.log("rate", contributionRate);
+
+    const contribution = Number(checkedContribution());
+    console.log("contribution", contribution);
+
+    const newTotalToPay = (subTotalValue + contribution).toFixed(2);
+    const newTotalNumber = Number(newTotalToPay);
+    console.log("newTotalToPay", newTotalToPay);
+
+    setTotalToPay(newTotalNumber);
+    return newTotalNumber;
+  }, [setTotalToPay, subTotalValue, contributionRate, checkedContribution]);
 
   const calculateSubTotal = useCallback(
     (updatedItems: Product[]) => {
@@ -151,14 +159,16 @@ const ShoppingList: React.FC = () => {
     handleQuantityChange(id, Math.max(0, newQuantity));
   };
 
-  const checkedContribution = (subTotalValue: number, rate: number) => {
-    const contribution = (subTotalValue * (rate / 100)).toFixed(2);
-    return contribution;
-  };
-
   const handleContributionChange = (rate: number) => {
-    setContributionRate(rate);
-    calculateTotalToPay(subTotalValue, rate);
+    if (contributionRate === rate) {
+      console.log("if");
+      setContributionRate(0);
+    } else {
+      console.log("else");
+
+      setContributionRate(rate);
+    }
+    calculateTotalToPay();
   };
 
   return (
@@ -235,9 +245,9 @@ const ShoppingList: React.FC = () => {
               )}
             </div>
             <fieldset>
-              <legend className="py-2">{contributionOptions[0].title}</legend>
+              <legend className="py-2">{contribution.title}</legend>
               <div className="px-2 gap-1">
-                {contributionOptions.map(
+                {contribution.options.map(
                   (option) =>
                     option.id && (
                       <Label
@@ -252,20 +262,19 @@ const ShoppingList: React.FC = () => {
                           className="mr-1"
                           value={option.rate}
                           checked={contributionRate === option.rate}
-                          onChange={() => handleContributionChange(option.rate)}
+                          onClick={() => handleContributionChange(option.rate)}
                         />
-                        {!!option.rate && "Contribuição: "}
                         {option.label}{" "}
-                        {!!option.rate &&
+                        {/* {!!option.rate &&
                           !!subTotalValue &&
                           `(R$${checkedContribution(subTotalValue, option.rate)
                             .split(".")
-                            .join(",")})`}
+                            .join(",")})`} */}
                       </Label>
                     ),
                 )}
                 <p className="italic text-xs py-1">
-                  {contributionOptions[0].description}
+                  {contribution.description}
                 </p>
               </div>
             </fieldset>
