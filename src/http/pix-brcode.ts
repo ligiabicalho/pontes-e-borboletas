@@ -1,5 +1,5 @@
 import contacts from "../db/contacts.json";
-import qrCodePixGenerator from "@/service/qrCodePixGenerator/pixGeneratorSingleton";
+import qrCodePixGenerator from "@/services/qrCodePixGenerator/pixGeneratorSingleton";
 
 export const getPixBrCode = async (value: number) => {
   const { creator, pix } = contacts;
