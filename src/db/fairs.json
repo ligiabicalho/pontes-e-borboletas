@@ -7,7 +7,7 @@
 		"weekdays": "Quintas e sábados",
     "weekdaysNum": [5, 7],
 		"openingHours": "11h às 15h",
-		"active": false
+		"active": true
 	},
 	{
 		"id": 2,
@@ -27,7 +27,7 @@
 		"weekdays": "Terças-feiras",
     "weekdaysNum": [3],
 		"openingHours": "10h às 17h",
-		"active": false
+		"active": true
 	},
 	{	
     "id": 4,
@@ -37,7 +37,7 @@
 		"weekdays": "Segundas",
     "weekdaysNum": [2],
 		"openingHours": "12h às 19h",
-		"active": false
+		"active": true
 	},
   {	
     "id": 5,
@@ -47,7 +47,7 @@
 		"weekdays": "Quartas",
     "weekdaysNum": [4],
 		"openingHours": "12h às 19h",
-		"active": false
+		"active": true
 	},
   {	
     "id": 6,
@@ -57,6 +57,6 @@
 		"weekdays": "2º e 4º Domingos",
     "weekdaysNum": [8],
 		"openingHours": "10h e 20h",
-		"active": false
+		"active": true
 	}
 ]

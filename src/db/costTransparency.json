@@ -8,52 +8,61 @@
         {	
           "id": 1,
           "name": "Luz", 
-          "cost": "R$300,00"
+          "cost": "R$120,00",
+          "active": true
+          
         },
         {	
           "id": 2,
           "name": "Água", 
-          "cost": "R$230,00"
+          "cost": "R$95,00",
+          "active": true
         },
         {	
           "id": 3,
           "name": "Internet e telefonia", 
-          "cost": "R$204,00"
+          "cost": "R$100,00",
+          "active": true
         },
         {	
           "id": 4,
           "name": "Frete e deslocamento", 
-          "cost": "R$1.250,00"
+          "cost": "R$680,00",
+          "active": true
         }
       ]
     },
     {
-      "title": "Remuneração Colab. IPB: R$9.552,00",
+      "title": "Remuneração Colab. IPB: R$3.600,00",
       "items": [
         {	
           "id": 1,
           "name": "Armazém", 
-          "cost": "R$2.664,00"
+          "cost": "R$2.664,00",
+          "active": false
         },
         {	
           "id": 2,
           "name": "Feiras", 
-          "cost": "R$3.168,00"
+          "cost": "R$3.600,00",
+          "active": true
         },
         {	
           "id": 3,
           "name": "Cozinha", 
-          "cost": "R$2.520,00"
+          "cost": "R$2.520,00",
+          "active": false
         },
         {	
           "id": 4,
           "name": "Comunicação", 
-          "cost": "R$1.200,00"
+          "cost": "R$1.200,00",
+          "active": false
         }
       ]
     },
        {
-      "title": "Total: R$11.536,00",
+      "title": "Total: R$4.595,00",
       "items": []
     }
   ]

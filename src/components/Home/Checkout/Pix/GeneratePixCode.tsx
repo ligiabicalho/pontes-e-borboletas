@@ -4,6 +4,15 @@ import { Button } from "../../../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { Copy } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Image from "next/image";
 
 type GeneratePixCodeProps = {
   value: number;
@@ -70,24 +79,49 @@ const GeneratePixCode: React.FC<GeneratePixCodeProps> = ({
         Gerar QrCode copia e cola
       </Button>
       {isSuccess && (
-        <div className="flex flex-row items-center gap-2">
-          <div className="flex flex-row bg-background p-2 rounded-md text-xs">
-            <p className="flex overflow-x-scroll lg:overflow-hidden">
-              <span
-                id={targetId}
-                aria-label="Pix QrCode copia e cola"
-                className="w-[220px] lg:w-[300px] max-h-[18px] select-all touch-pan-x"
-              >
-                {data?.brCode}
-              </span>
-            </p>
-            <p>...</p>
+        <>
+          <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-row bg-background p-2 rounded-md text-xs">
+              <p className="flex overflow-x-scroll lg:overflow-hidden">
+                <span
+                  id={targetId}
+                  aria-label="Pix QrCode copia e cola"
+                  className="w-[220px] lg:w-[300px] max-h-[18px] select-all touch-pan-x"
+                >
+                  {data?.brCode}
+                </span>
+              </p>
+              <p>...</p>
+            </div>
+            <CopyToClipboardButton
+              text={data?.brCode as string}
+              targetId={`#${targetId}`}
+            />
           </div>
-          <CopyToClipboardButton
-            text={data?.brCode as string}
-            targetId={`#${targetId}`}
-          />
-        </div>
+
+          <Dialog>
+            <DialogTrigger>
+              <span className="text-xs underline text-zinc-600">
+                Se preferir o QrCode, clique aqui.
+              </span>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Pague com PIX</DialogTitle>
+                <DialogDescription className="flex flex-col justify-center items-center">
+                  <Image
+                    src={data?.qrCodeImage as string}
+                    alt="qrcode-pix"
+                    width={150}
+                    height={150}
+                  />
+                  <p>IPB - Lina Raquel Marinho</p>
+                  <p>Valor: R$ {value}</p>
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        </>
       )}
       <p className="text-sm italic text-justify">
         Não é necessário nos enviar comprovante. Construímos com as bases da
