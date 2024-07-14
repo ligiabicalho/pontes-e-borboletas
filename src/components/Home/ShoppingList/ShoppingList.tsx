@@ -79,25 +79,29 @@ const ShoppingList: React.FC = () => {
     setItemsList(result);
   };
 
-  const checkedContribution = useCallback(() => {
-    const contribution = (subTotalValue * (contributionRate / 100)).toFixed(2);
-    return contribution;
-  }, [subTotalValue, contributionRate]);
+  const checkedContribution = useCallback(
+    (subTotalValue: number, contributionRate: number) => {
+      const contribution = (subTotalValue * (contributionRate / 100)).toFixed(
+        2,
+      );
+      return contribution;
+    },
+    [],
+  );
 
-  const calculateTotalToPay = useCallback(() => {
-    console.log("subTotalValue", subTotalValue);
-    console.log("rate", contributionRate);
+  const calculateTotalToPay = useCallback(
+    (subTotalValue: number, contributionRate: number) => {
+      const contribution = Number(
+        checkedContribution(subTotalValue, contributionRate),
+      );
+      const newTotalToPay = (subTotalValue + contribution).toFixed(2);
+      const newTotalNumber = Number(newTotalToPay);
 
-    const contribution = Number(checkedContribution());
-    console.log("contribution", contribution);
-
-    const newTotalToPay = (subTotalValue + contribution).toFixed(2);
-    const newTotalNumber = Number(newTotalToPay);
-    console.log("newTotalToPay", newTotalToPay);
-
-    setTotalToPay(newTotalNumber);
-    return newTotalNumber;
-  }, [setTotalToPay, subTotalValue, contributionRate, checkedContribution]);
+      setTotalToPay(newTotalNumber);
+      return newTotalNumber;
+    },
+    [setTotalToPay, checkedContribution],
+  );
 
   const calculateSubTotal = useCallback(
     (updatedItems: Product[]) => {
@@ -163,12 +167,13 @@ const ShoppingList: React.FC = () => {
     if (contributionRate === rate) {
       console.log("if");
       setContributionRate(0);
+      calculateTotalToPay(subTotalValue, 0);
     } else {
       console.log("else");
 
       setContributionRate(rate);
+      calculateTotalToPay(subTotalValue, rate);
     }
-    calculateTotalToPay();
   };
 
   return (
