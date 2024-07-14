@@ -106,7 +106,7 @@ const ShoppingList: React.FC = () => {
   const calculateSubTotal = useCallback(
     (updatedItems: Product[]) => {
       const newSubTotalValue = updatedItems
-        .reduce((acc, item) => acc + item.price * (item.quantity || 0), 0)
+        .reduce((acc, item) => acc + item.priceIpb * (item.quantity || 0), 0)
         .toFixed(2);
       const newSubTotalNumber = Number(newSubTotalValue);
       setSubTotalValue(newSubTotalNumber);
@@ -239,7 +239,7 @@ const ShoppingList: React.FC = () => {
                     <li key={item.id} className="flex justify-between">
                       <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
                       <span className="text-xs">{`R$${(
-                        item.quantity * item.price
+                        item.quantity * item.priceIpb
                       )
                         .toFixed(2)
                         .split(".")
