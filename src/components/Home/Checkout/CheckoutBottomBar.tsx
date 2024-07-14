@@ -9,19 +9,20 @@ import ScrollToTopButton from "./ScrollToTopButton";
 type CheckoutProps = {
   subTotalValue: number;
   totalValue: number;
-  hasPixCode: boolean;
+  hasPixCode?: boolean;
 };
 
 export const CheckoutBottomBar = ({
   subTotalValue,
   totalValue,
-  hasPixCode,
+  // hasPixCode,
 }: CheckoutProps) => {
   const router = useRouter();
   const currentPage = router.pathname;
   const targetPage = `${currentPage}#checkout`;
 
-  const value = hasPixCode ? totalValue : subTotalValue;
+  // const value = hasPixCode ? totalValue : subTotalValue;
+  const value = totalValue ? totalValue : subTotalValue;
 
   const { isBottomBarVisible, setIsBottomBarVisible } =
     useShoppingListContext();
@@ -54,7 +55,8 @@ export const CheckoutBottomBar = ({
       <div className="flex w-full items-center gap-2 justify-between">
         <p className="flex flex-col">
           <span className="flex before:font-primary text-neutral-black text-right text-xs">
-            {hasPixCode ? "Total" : "Sub-total"}
+            {/* {hasPixCode ? "Total" : "Sub-total"} */}
+            Total
           </span>
           <span className="text-xs text-secondary font-primary self-end">
             R$
