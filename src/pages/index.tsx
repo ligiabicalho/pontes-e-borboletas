@@ -1,9 +1,12 @@
 import Hero from "@/components/Home/Hero/Hero";
+import DefaultLayout from "@/layouts/DefaultLayout";
 
 export default function Home() {
   return (
     <>
-      <Hero />
+      <DefaultLayout>
+        <Hero />
+      </DefaultLayout>
     </>
   );
 }

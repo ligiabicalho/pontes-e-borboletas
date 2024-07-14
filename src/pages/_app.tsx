@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Titillium_Web, Odibee_Sans } from "next/font/google";
 import { NextPage } from "next";
 import type { ReactElement, ReactNode } from "react";
-import DefaultLayout from "@/layouts/DefaultLayout";
+// import DefaultLayout from "@/layouts/DefaultLayout";
 import { Toaster } from "@/components/ui/toaster";
 import { ShoppingListProvider } from "@/contexts/shoppingListContext";
 import { Analytics } from "@vercel/analytics/react";
@@ -32,12 +32,14 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout =
-    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
+  // const getLayout =
+  //   Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
   return (
     <QueryClientProvider client={queryClient}>
       <ShoppingListProvider>
-        {getLayout(<Component {...pageProps} />)}
+        {/* {getLayout(<Component {...pageProps} />)} */}
+        <Component {...pageProps} />
+
         <Analytics />
 
         <Toaster />
