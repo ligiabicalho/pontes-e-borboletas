@@ -28,6 +28,10 @@ const NAV_ITEMS_MOBILE: NavItem[] = [
     href: "/feiras",
   },
   {
+    title: "Como funcionamos",
+    href: "/funcionamento",
+  },
+  {
     title: "Contato",
     href: "/contato",
   },
