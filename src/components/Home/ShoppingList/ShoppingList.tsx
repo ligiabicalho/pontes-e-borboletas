@@ -165,12 +165,9 @@ const ShoppingList: React.FC = () => {
 
   const handleContributionChange = (rate: number) => {
     if (contributionRate === rate) {
-      console.log("if");
       setContributionRate(0);
       calculateTotalToPay(subTotalValue, 0);
     } else {
-      console.log("else");
-
       setContributionRate(rate);
       calculateTotalToPay(subTotalValue, rate);
     }
