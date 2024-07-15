@@ -2,11 +2,13 @@ import * as React from "react";
 import fairs from "../db/fairs.json";
 
 export default function Fairs() {
-  const sortedFairs = fairs.sort((a: any, b: any) => {
-    const aMinWeekday = Math.min(...a.weekdaysNum);
-    const bMinWeekday = Math.min(...b.weekdaysNum);
-    return aMinWeekday - bMinWeekday;
-  });
+  const sortedFairs = fairs
+    .filter((fair) => fair.active)
+    .sort((a: any, b: any) => {
+      const aMinWeekday = Math.min(...a.weekdaysNum);
+      const bMinWeekday = Math.min(...b.weekdaysNum);
+      return aMinWeekday - bMinWeekday;
+    });
 
   return (
     <section className="h-fit flex flex-col pt-20 px-6">
