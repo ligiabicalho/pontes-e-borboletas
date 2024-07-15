@@ -1,0 +1,31 @@
+{
+  "title": "Funcionamento da Feira Autogerida",
+  "description": "Somos uma feira de comércio justo e nosso modo de funcionamento é a autogestão. Isto permite e convoca para coparticipação! O que engaja comunidade e liberdade. Além de desdobrar outros afetos da micropolítica como transparência e confiança.",
+  "metadata": [
+    {
+      "label": "1º",
+      "class": "text-sm mr-2 font-bold",
+      "value": "Escolha seus produtos"
+    },
+    {
+      "label": "2º",
+      "class": "text-sm mr-2 font-bold",
+      "value": "Compreenda o cálculo das Outras Economias IPB:"
+    },
+    {
+      "label": "\u2022",
+      "class": "text-sm mr-2 pl-2",
+      "value": "Valor de custo dos produtos = valor do custo da produção + a renda de quem produziu"
+    },
+    {
+      "label": "\u2022",
+      "class": "text-sm mr-2 pl-2",
+      "value": "Valor das Outras Economias IPB = acréscimo de 20% ao valor das suas compras."
+    },
+    {
+      "label": "3º",
+      "class": "text-sm mr-2 font-bold",
+      "value": "Pague com Pix Copia e Cola."
+    }
+  ]
+}
