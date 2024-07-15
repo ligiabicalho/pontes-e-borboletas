@@ -116,7 +116,7 @@ const GeneratePixCode: React.FC<GeneratePixCodeProps> = ({
                     height={150}
                   />
                   <p>IPB - Lina Raquel Marinho</p>
-                  <p>Valor: R$ {value}</p>
+                  <p>Valor: R$ {value.toFixed(2).split(".").join(",")}</p>
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>
