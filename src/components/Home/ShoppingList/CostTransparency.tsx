@@ -18,11 +18,13 @@ const CostTransparency: React.FC = () => {
               <li key={i} className="pb-1">
                 <p className="text-xs italic py-1">{type.title}</p>
                 <ul>
-                  {type.items.map((item) => (
-                    <li key={item.id} className="text-xs pl-2">
-                      {`${item.name} (${item.cost})`}
-                    </li>
-                  ))}
+                  {type.items
+                    .filter((item) => item.active)
+                    .map((item) => (
+                      <li key={item.id} className="text-xs pl-2">
+                        {`${item.name} (${item.cost})`}
+                      </li>
+                    ))}
                 </ul>
               </li>
             ))}
