@@ -1,6 +1,6 @@
-import { ModeToggle } from "@/components/navbar/mode-toggle";
-import { UserNav } from "@/components/navbar/user-nav";
-import { SheetMenu } from "@/components/navbar/sheet-menu";
+import { ModeToggle } from "@/components/admin-panel/navbar/mode-toggle";
+import { UserNav } from "@/components/admin-panel/navbar/user-nav";
+import { SheetMenu } from "@/components/admin-panel/navbar/sheet-menu";
 
 interface NavbarProps {
   title: string;
