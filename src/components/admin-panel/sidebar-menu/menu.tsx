@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Ellipsis, LogOut } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -8,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { getMenuList } from "@/lib/admin-painel/menu-list";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CollapseMenuButton } from "@/components/admin-panel/collapse-menu-button";
+import { CollapseMenuButton } from "@/components/admin-panel/sidebar-menu/collapse-menu-button";
 import {
   Tooltip,
   TooltipTrigger,
@@ -121,12 +119,12 @@ export function Menu({ isOpen }: MenuProps) {
                         isOpen === false ? "opacity-0 hidden" : "opacity-100",
                       )}
                     >
-                      Sign out
+                      Sair
                     </p>
                   </Button>
                 </TooltipTrigger>
                 {isOpen === false && (
-                  <TooltipContent side="right">Sign out</TooltipContent>
+                  <TooltipContent side="right">Sair</TooltipContent>
                 )}
               </Tooltip>
             </TooltipProvider>

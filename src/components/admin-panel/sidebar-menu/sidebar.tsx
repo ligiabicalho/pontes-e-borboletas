@@ -4,9 +4,9 @@ import { PanelsTopLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/hooks/use-store";
 import { Button } from "@/components/ui/button";
-import { Menu } from "@/components/admin-panel/menu";
+import { Menu } from "@/components/admin-panel/sidebar-menu/menu";
 import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
-import { SidebarToggle } from "@/components/admin-panel/sidebar-toggle";
+import { SidebarToggle } from "@/components/admin-panel/sidebar-menu/sidebar-toggle";
 
 export function Sidebar() {
   const sidebar = useStore(useSidebarToggle, (state) => state);
@@ -30,7 +30,7 @@ export function Sidebar() {
           variant="link"
           asChild
         >
-          <Link href="/dashboard" className="flex items-center gap-2">
+          <Link href="/admin" className="flex items-center gap-2">
             <PanelsTopLeft className="w-6 h-6 mr-1" />
             <h1
               className={cn(
@@ -40,7 +40,7 @@ export function Sidebar() {
                   : "translate-x-0 opacity-100",
               )}
             >
-              Brand
+              IPB Feiras
             </h1>
           </Link>
         </Button>
