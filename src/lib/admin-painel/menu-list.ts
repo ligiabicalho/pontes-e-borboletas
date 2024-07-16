@@ -32,69 +32,69 @@ export function getMenuList(pathname: string): Group[] {
       groupLabel: "",
       menus: [
         {
-          href: "/dashboard",
+          href: "/admin",
           label: "Dashboard",
-          active: pathname.includes("/dashboard"),
+          active: pathname === "/admin",
           icon: LayoutGrid,
           submenus: [],
         },
       ],
     },
     {
-      groupLabel: "Contents",
+      groupLabel: "Feiras",
       menus: [
         {
           href: "",
-          label: "Posts",
-          active: pathname.includes("/posts"),
+          label: "Produtos",
+          active: false,
           icon: SquarePen,
           submenus: [
             {
-              href: "/posts",
-              label: "All Posts",
-              active: pathname === "/posts",
+              href: "/admin/products",
+              label: "Todos os produtos",
+              active: pathname === "/admin/products",
             },
             {
-              href: "/posts/new",
-              label: "New Post",
-              active: pathname === "/posts/new",
+              href: "/admin/products/new",
+              label: "Novo produto",
+              active: pathname === "/admin/products/new",
             },
           ],
         },
         {
-          href: "/categories",
-          label: "Categories",
+          href: "/admin/categories",
+          label: "Categorias",
           active: pathname.includes("/categories"),
           icon: Bookmark,
           submenus: [],
         },
-        {
-          href: "/tags",
-          label: "Tags",
-          active: pathname.includes("/tags"),
-          icon: Tag,
-          submenus: [],
-        },
+        // {
+        //   href: "/tags",
+        //   label: "Tags",
+        //   active: pathname.includes("/tags"),
+        //   icon: Tag,
+        //   submenus: [],
+        // },
       ],
     },
-    {
-      groupLabel: "Settings",
-      menus: [
-        {
-          href: "/users",
-          label: "Users",
-          active: pathname.includes("/users"),
-          icon: Users,
-          submenus: [],
-        },
-        {
-          href: "/account",
-          label: "Account",
-          active: pathname.includes("/account"),
-          icon: Settings,
-          submenus: [],
-        },
-      ],
-    },
+    // {
+    //   groupLabel: "Configurações",
+    //   menus: [
+    //     {
+    //       href: "/admin/users",
+    //       label: "Usuários",
+    //       active: pathname.includes("/users"),
+    //       icon: Users,
+    //       submenus: [],
+    //     },
+    //     {
+    //       href: "/admin/account",
+    //       label: "Conta",
+    //       active: pathname.includes("/account"),
+    //       icon: Settings,
+    //       submenus: [],
+    //     },
+    //   ],
+    // },
   ];
 }
