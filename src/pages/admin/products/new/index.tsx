@@ -1,4 +1,4 @@
-import PlaceholderContent from "@/components/admin-panel/demo/placeholder-content";
+import { NewProduct } from "@/components/admin-panel/products/new-product";
 import AdminCompleteLayout from "@/layouts/admin-panel";
 
 export default function NewProductPage() {
@@ -10,7 +10,7 @@ export default function NewProductPage() {
         href: "/admin/products",
       }}
     >
-      <PlaceholderContent />
+      <NewProduct />
     </AdminCompleteLayout>
   );
 }
