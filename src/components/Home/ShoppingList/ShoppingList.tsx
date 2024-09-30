@@ -12,8 +12,7 @@ import { Product } from "@/entities/product";
 import { CheckoutBottomBar } from "@/components/Home/Checkout/CheckoutBottomBar";
 import { ShoppingBasket } from "lucide-react";
 import CostTransparency from "./CostTransparency";
-
-const activeItems = productsList.filter((item) => item.active);
+import { sortAndSearchProducts } from "@/lib/utils/sortAndSearch";
 
 //TODO: Buscar por categorias
 
@@ -24,59 +23,23 @@ const ShoppingList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(true);
   const [hasPixCode, setHasPixCode] = useState<boolean>(false);
-  type SearchType = "name" | "category";
-  const [searchType] = useState<SearchType>("name"); //TODO: setSearchType
+  const [itemsList, setItemsList] = useState<Product[]>([...productsList]);
 
   const contributionDefault =
     contribution.options.find((option) => option.default)?.rate || 0;
   const [contributionRate, setContributionRate] =
     useState<number>(contributionDefault);
 
-  const sortAndSearchProducts = (
-    products: Product[],
-    searchQuery?: string,
-    searchType?: SearchType,
-  ): Product[] => {
-    let filteredProducts = products;
-
-    if (searchQuery && searchType) {
-      filteredProducts = filteredProducts.filter((product) => {
-        if (searchType === "name") {
-          return product.name.toLowerCase().includes(searchQuery.toLowerCase());
-        } else {
-          return product.category.toLowerCase() === searchQuery.toLowerCase();
-        }
-      });
-    }
-    // organiza alfabeticamente
-    const sortedProductsList = filteredProducts.sort((a, b) =>
-      a.name.localeCompare(b.name),
-    );
-    return sortedProductsList;
-  };
-
-  const sortedProductsList = sortAndSearchProducts(
-    activeItems,
-    searchQuery,
-    searchType,
-  );
-
-  const [itemsList, setItemsList] = useState<Product[]>([
-    ...sortedProductsList,
-  ]);
-
   const handleSearch = (value: string) => {
     setSearchQuery(value);
     setIsInputEmpty(value === "");
-    const result = sortAndSearchProducts(activeItems, searchQuery, searchType);
-    setItemsList(result);
+    sortAndSearchProducts(productsList, value, setItemsList);
   };
 
   const handleClearSearch = () => {
     setSearchQuery("");
     setIsInputEmpty(true);
-    const result = sortAndSearchProducts(activeItems, "", searchType);
-    setItemsList(result);
+    sortAndSearchProducts(productsList, "", setItemsList);
   };
 
   const checkedContribution = useCallback(
