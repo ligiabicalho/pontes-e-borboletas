@@ -12,6 +12,8 @@ import { CheckoutBottomBar } from "@/components/Home/Checkout/CheckoutBottomBar"
 import { ShoppingBasket } from "lucide-react";
 import CostTransparency from "./CostTransparency";
 import { sortAndSearchProducts } from "@/lib/utils/sortAndSearch";
+import Link from "next/link";
+import handleScroll from "@/lib/utils/scrollToElement";
 
 //TODO: Buscar por categorias
 
@@ -25,11 +27,6 @@ const ShoppingList: React.FC = () => {
   const [itemsList, setItemsList] = useState<Product[]>([...productsList]);
   const [isContributing, setIsContributing] = useState<boolean>(true);
 
-  // const contributionDefault =
-  //   contribution.options.find((option) => option.default)?.rate || 0;
-  // const [contributionRate, setContributionRate] =
-  //   useState<number>(contributionDefault);
-
   const handleSearch = (value: string) => {
     setSearchQuery(value);
     setIsInputEmpty(value === "");
@@ -41,30 +38,6 @@ const ShoppingList: React.FC = () => {
     setIsInputEmpty(true);
     sortAndSearchProducts(productsList, "", setItemsList);
   };
-
-  // const checkedContribution = useCallback(
-  //   (subTotalValue: number, contributionRate: number) => {
-  //     const contribution = (subTotalValue * (contributionRate / 100)).toFixed(
-  //       2,
-  //     );
-  //     return contribution;
-  //   },
-  //   [],
-  // );
-
-  // const calculateTotalToPay = useCallback(
-  //   (subTotalValue: number, contributionRate: number) => {
-  //     const contribution = Number(
-  //       checkedContribution(subTotalValue, contributionRate),
-  //     );
-  //     const newTotalToPay = (subTotalValue + contribution).toFixed(2);
-  //     const newTotalNumber = Number(newTotalToPay);
-
-  //     setTotalToPay(newTotalNumber);
-  //     return newTotalNumber;
-  //   },
-  //   [setTotalToPay, checkedContribution],
-  // );
 
   const calculateSubTotal = useCallback(
     (updatedItems: Product[], isContributing: boolean) => {
@@ -158,7 +131,7 @@ const ShoppingList: React.FC = () => {
             <table>
               <tbody className="divide-y divide-gray-200">
                 {itemsList.map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} id={item.id.toString()}>
                     <td
                       className={`flex flex-col py-2 whitespace-nowrap ${
                         !!item.quantity && "bg-gray-100"
@@ -204,15 +177,21 @@ const ShoppingList: React.FC = () => {
               {!!subTotalValue && (
                 <ul className="flex flex-col self-start w-full p-2 bg-white rounded-sm">
                   {selectedItems.map((item) => (
-                    <li key={item.id} className="flex justify-between">
-                      <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
-                      <span className="text-xs">{`R$${(
-                        item.quantity * item.priceIpb
-                      )
-                        .toFixed(2)
-                        .split(".")
-                        .join(",")}`}</span>
-                    </li>
+                    <Link
+                      key={item.id}
+                      href={`#${item.id}`}
+                      onClick={(e) => handleScroll(e, `${item.id}`)}
+                    >
+                      <li key={item.id} className="flex justify-between">
+                        <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
+                        <span className="text-xs">
+                          {`R$${(item.quantity * item.priceIpb)
+                            .toFixed(2)
+                            .split(".")
+                            .join(",")}`}
+                        </span>
+                      </li>
+                    </Link>
                   ))}
                 </ul>
               )}
