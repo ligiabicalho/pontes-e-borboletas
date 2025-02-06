@@ -5,7 +5,6 @@ import GeneratePixCode from "../Checkout/Pix/GeneratePixCode";
 
 import QuantityControlButtons from "./QuantityControlButtons";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import SearchBar from "./SearchBar";
 import { parseItemName } from "@/lib/parseItemName";
 import { Product } from "@/entities/product";
@@ -13,6 +12,8 @@ import { CheckoutBottomBar } from "@/components/Home/Checkout/CheckoutBottomBar"
 import { ShoppingBasket } from "lucide-react";
 import CostTransparency from "./CostTransparency";
 import { sortAndSearchProducts } from "@/lib/utils/sortAndSearch";
+import Link from "next/link";
+import handleScroll from "@/lib/utils/scrollToElement";
 
 //TODO: Buscar por categorias
 
@@ -24,11 +25,7 @@ const ShoppingList: React.FC = () => {
   const [isInputEmpty, setIsInputEmpty] = useState<boolean>(true);
   const [hasPixCode, setHasPixCode] = useState<boolean>(false);
   const [itemsList, setItemsList] = useState<Product[]>([...productsList]);
-
-  const contributionDefault =
-    contribution.options.find((option) => option.default)?.rate || 0;
-  const [contributionRate, setContributionRate] =
-    useState<number>(contributionDefault);
+  const [isContributing, setIsContributing] = useState<boolean>(true);
 
   const handleSearch = (value: string) => {
     setSearchQuery(value);
@@ -42,40 +39,29 @@ const ShoppingList: React.FC = () => {
     sortAndSearchProducts(productsList, "", setItemsList);
   };
 
-  const checkedContribution = useCallback(
-    (subTotalValue: number, contributionRate: number) => {
-      const contribution = (subTotalValue * (contributionRate / 100)).toFixed(
-        2,
-      );
-      return contribution;
-    },
-    [],
-  );
-
-  const calculateTotalToPay = useCallback(
-    (subTotalValue: number, contributionRate: number) => {
-      const contribution = Number(
-        checkedContribution(subTotalValue, contributionRate),
-      );
-      const newTotalToPay = (subTotalValue + contribution).toFixed(2);
-      const newTotalNumber = Number(newTotalToPay);
-
-      setTotalToPay(newTotalNumber);
-      return newTotalNumber;
-    },
-    [setTotalToPay, checkedContribution],
-  );
-
   const calculateSubTotal = useCallback(
-    (updatedItems: Product[]) => {
-      const newSubTotalValue = updatedItems
-        .reduce((acc, item) => acc + item.priceIpb * (item.quantity || 0), 0)
-        .toFixed(2);
-      const newSubTotalNumber = Number(newSubTotalValue);
+    (updatedItems: Product[], isContributing: boolean) => {
+      const newSubTotalValue = (hasContribution = true) => {
+        const result = updatedItems
+          .reduce(
+            (acc, item) =>
+              acc +
+              (hasContribution ? item.priceIpb : item.price) *
+                (item.quantity || 0),
+            0,
+          )
+          .toFixed(2);
+
+        return Number(result);
+      };
+      const newSubTotalNumber = newSubTotalValue();
       setSubTotalValue(newSubTotalNumber);
-      calculateTotalToPay(newSubTotalNumber, contributionRate);
+
+      isContributing
+        ? setTotalToPay(newSubTotalNumber)
+        : setTotalToPay(newSubTotalValue(false));
     },
-    [setSubTotalValue, calculateTotalToPay, contributionRate],
+    [setSubTotalValue, setTotalToPay],
   );
 
   const handleQuantityChange = useCallback(
@@ -109,11 +95,11 @@ const ShoppingList: React.FC = () => {
           }
         }
 
-        calculateSubTotal(updatedSelectedItems);
+        calculateSubTotal(updatedSelectedItems, isContributing);
         return updatedSelectedItems;
       });
     },
-    [itemsList, calculateSubTotal],
+    [itemsList, calculateSubTotal, isContributing],
   );
 
   const incrementQuantity = (id: number, quantity: number) => {
@@ -126,14 +112,9 @@ const ShoppingList: React.FC = () => {
     handleQuantityChange(id, Math.max(0, newQuantity));
   };
 
-  const handleContributionChange = (rate: number) => {
-    if (contributionRate === rate) {
-      setContributionRate(0);
-      calculateTotalToPay(subTotalValue, 0);
-    } else {
-      setContributionRate(rate);
-      calculateTotalToPay(subTotalValue, rate);
-    }
+  const handleContributionChange = (contribution: boolean) => {
+    setIsContributing(contribution);
+    calculateSubTotal(selectedItems, contribution);
   };
 
   return (
@@ -150,7 +131,7 @@ const ShoppingList: React.FC = () => {
             <table>
               <tbody className="divide-y divide-gray-200">
                 {itemsList.map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.id} id={item.id.toString()}>
                     <td
                       className={`flex flex-col py-2 whitespace-nowrap ${
                         !!item.quantity && "bg-gray-100"
@@ -196,15 +177,21 @@ const ShoppingList: React.FC = () => {
               {!!subTotalValue && (
                 <ul className="flex flex-col self-start w-full p-2 bg-white rounded-sm">
                   {selectedItems.map((item) => (
-                    <li key={item.id} className="flex justify-between">
-                      <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
-                      <span className="text-xs">{`R$${(
-                        item.quantity * item.priceIpb
-                      )
-                        .toFixed(2)
-                        .split(".")
-                        .join(",")}`}</span>
-                    </li>
+                    <Link
+                      key={item.id}
+                      href={`#${item.id}`}
+                      onClick={(e) => handleScroll(e, `${item.id}`)}
+                    >
+                      <li key={item.id} className="flex justify-between">
+                        <span className="text-xs">{`${item.quantity} ${item.name} ${item.unit}`}</span>
+                        <span className="text-xs">
+                          {`R$${(item.quantity * item.priceIpb)
+                            .toFixed(2)
+                            .split(".")
+                            .join(",")}`}
+                        </span>
+                      </li>
+                    </Link>
                   ))}
                 </ul>
               )}
@@ -220,14 +207,16 @@ const ShoppingList: React.FC = () => {
                         htmlFor={`rate-${option.rate}`}
                         key={option.rate}
                       >
-                        <Input
+                        <input
                           id={`rate-${option.rate}`}
-                          type="radio"
+                          type="checkbox"
                           name="contribution"
                           className="mr-1"
                           value={option.rate}
-                          checked={contributionRate === option.rate}
-                          onClick={() => handleContributionChange(option.rate)}
+                          checked={!isContributing}
+                          onClick={() =>
+                            handleContributionChange(!isContributing)
+                          }
                         />
                         {option.label}{" "}
                         {/* {!!option.rate &&

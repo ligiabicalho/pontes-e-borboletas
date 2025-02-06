@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useShoppingListContext } from "@/contexts/shoppingListContext";
 import ScrollToTopButton from "./ScrollToTopButton";
+import handleScroll from "@/lib/utils/scrollToElement";
 
 type CheckoutProps = {
   subTotalValue: number;
@@ -68,7 +69,10 @@ export const CheckoutBottomBar = ({
             {value.toFixed(2).split(".").join(",")}
           </span>
         </p>
-        <Link href={targetPage}>
+        <Link
+          href={targetPage}
+          onClick={(e) => handleScroll(e, "checkout", 60)}
+        >
           <Button>Finalizar compra</Button>
         </Link>
         <ScrollToTopButton />
